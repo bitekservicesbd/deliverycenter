@@ -1,0 +1,129 @@
+name: Deploy App Service
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+
+jobs:
+  build-and-push-image:
+    name: Build and Push Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Create env file
+        run: |
+          touch ./src/.env
+          echo "${{ secrets.SERVER_ENV_PROD }}" > ./src/.env
+          cat ./src/.env
+      
+      - name: Set lowercase repository name
+        id: set_repo_name
+        run: |
+          REPO_NAME=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          echo "repo_name=$REPO_NAME" >> $GITHUB_OUTPUT
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.TOKEN_GITHUB }}
+      
+      - name: Build and push app image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./src/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ steps.set_repo_name.outputs.repo_name }}:latest
+      
+  deploy-app-service:
+    needs: build-and-push-image
+    runs-on: [self-hosted, Linux, X64]
+    steps:
+      - name: Set lowercase repository name
+        id: set_repo_name_deploy
+        run: |
+          REPO_NAME=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          echo "repo_name=$REPO_NAME" >> $GITHUB_OUTPUT
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.TOKEN_GITHUB }}
+      
+      - name: Setup Docker auth for sudo
+        run: |
+          # Authenticate Docker for root user directly
+          echo "${{ secrets.TOKEN_GITHUB }}" | sudo docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      
+      - name: Update app services
+        run: |
+          cd ${{ secrets.AWS_DIRECTORY }}
+          # Stop services
+          sudo docker-compose stop api
+
+          # Remove service containers
+          sudo docker-compose rm -f api
+
+      - name: Remove old images
+        run: |
+          cd ${{ secrets.AWS_DIRECTORY }}
+
+          # Stop only app and worker services
+          sudo docker-compose stop api || true
+
+          # Remove only app and worker containers
+          sudo docker-compose rm -f api || true
+
+          # Remove only app and worker images
+          sudo docker rmi -f ghcr.io/${{ steps.set_repo_name_deploy.outputs.repo_name }}:latest || true
+
+          # Pull the latest images
+          sudo docker pull ghcr.io/${{ steps.set_repo_name_deploy.outputs.repo_name }}:latest
+
+      - name: Remove existing api directories
+        run: |
+          cd ${{ secrets.AWS_DIRECTORY }}
+          sudo rm -rf app
+
+      - name: Start temporary Docker containers
+        run: |
+          cd ${{ secrets.AWS_DIRECTORY }}
+          sudo docker run -it -d --name deliverycenter_app ghcr.io/${{ steps.set_repo_name_deploy.outputs.repo_name }}:latest
+
+      - name: Copy files from app container
+        run: |
+          cd ${{ secrets.AWS_DIRECTORY }}
+          sudo docker cp deliverycenter_app:/var/www/app/. src
+
+      - name: Change ownership of app directory
+        run: |
+          cd ${{ secrets.AWS_DIRECTORY }}
+          sudo chown -R www-data:www-data ${{ secrets.AWS_DIRECTORY }}/src
+
+      - name: Stop temporary containers
+        run: |
+          cd ${{ secrets.AWS_DIRECTORY }}
+          sudo docker rm -f deliverycenter_app
+
+      - name: Start Docker containers with docker-compose
+        run: |
+          cd ${{ secrets.AWS_DIRECTORY }}
+          sudo docker-compose up -d api
+          sudo docker-compose exec api composer install
+          sudo docker-compose exec api chmod 777 -R ./storage/
+      
+      - name: Clean up unused Docker resources
+        run: |
+          cd ${{ secrets.AWS_DIRECTORY }}
+          # Remove all unused containers, networks, images (both dangling and unreferenced), and volumes
+          sudo docker system prune -a -f  

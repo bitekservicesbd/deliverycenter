@@ -1,0 +1,5 @@
+# Existing Laravel & Node ignores (keep your current ones)
+/node_modules
+/ssl
+.data/
+make-ssl.sh

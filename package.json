@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "pint": "php src/vendor/bin/pint",
+    "lint": "prettier --check \"src/resources/views/**/*.blade.php\" \"src/resources/js/**/*.{js,jsx,ts,tsx}\"",
+    "pint-fix": "php src/vendor/bin/pint --verbose",
+    "lint-fix": "prettier --write \"src/resources/views/**/*.blade.php\" \"src/resources/js/**/*.{js,jsx,ts,tsx}\"",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "prettier": "^3.6.2",
+    "prettier-plugin-blade": "^2.1.21",
+    "prettier-plugin-organize-imports": "^4.1.0",
+    "prettier-plugin-tailwindcss": "^0.6.13"
+  }
+}
