@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,49 +9,78 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
-        'username',
         'name',
         'email',
-        'password',
+        'phone',
         'user_type',
-        'company_name',
-        'status',
+        'password',
+        'email_verified_at',
+        'is_active',
+        'employee_number',
+        'hire_date',
+        'permissions',
+        'avatar',
+        'last_login_at',
+        'company_id'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'is_active' => 'boolean',
+        'hire_date' => 'date',
+        'permissions' => 'array',
+        'last_login_at' => 'datetime',
+    ];
+
+    public function company()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->belongsTo(Company::class);
     }
 
-    public function tenants()
+    public function securitySettings()
     {
-        return $this->hasMany(Tenant::class);
+        return $this->hasOne(UserSecuritySetting::class);
+    }
+
+    public function alertSettings()
+    {
+        return $this->hasOne(UserAlertSetting::class);
+    }
+
+    /**
+     * Check if user has specific permission
+     */
+    public function hasPermission(string $permission): bool
+    {
+        if (!$this->permissions) {
+            return false;
+        }
+
+        return in_array($permission, $this->permissions);
+    }
+
+    /**
+     * Get security setting value
+     */
+    public function getSecuritySetting(string $setting): bool
+    {
+        return $this->securitySettings?->{$setting} ?? false;
+    }
+
+    /**
+     * Get alert setting value
+     */
+    public function getAlertSetting(string $setting): bool
+    {
+        return $this->alertSettings?->{$setting} ?? false;
     }
 }
