@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Api\V1\Tenant;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\Tenant\ChangePasswordRequest;
+use App\Http\Requests\Api\V1\Tenant\UpdateProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cookie;
-use App\Http\Requests\Api\V1\Tenant\UpdateProfileRequest;
-use App\Http\Requests\Api\V1\Tenant\ChangePasswordRequest;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -22,11 +21,11 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
-            return $this->errorResponse('Invalid credentials', 401);
+            return errorResponse('Invalid credentials', 401);
         }
 
         if ($user->status != 'active') {
-            return $this->errorResponse('Account is inactive', 403);
+            return errorResponse('Account is inactive', 403);
         }
 
         // Create token with proper abilities
@@ -53,7 +52,7 @@ class AuthController extends Controller
         // Update last login
         $user->update(['last_login_at' => now()]);
 
-        return $this->successResponse([
+        return successResponse([
             'user' => $user->toResource(),
             'tenant' => tenant('id'),
             'abilities' => $abilities,
@@ -68,10 +67,10 @@ class AuthController extends Controller
         $user = $request->user();
 
         if (! $user || ! $user->is_active) {
-            return $this->errorResponse('Invalid or inactive user', 401);
+            return errorResponse('Invalid or inactive user', 401);
         }
 
-        return $this->successResponse([
+        return successResponse([
             'user' => $this->formatUserData($user),
             'tenant' => tenant('id'),
             'abilities' => $this->getUserAbilities($user),
@@ -83,9 +82,9 @@ class AuthController extends Controller
      */
     public function profile(Request $request)
     {
-        return $this->successResponse([
-            'user' => $this->formatUserData($request->user()),
-        ]);
+        return successResponse([
+            'user' => $request->user()->toResource(),
+        ], 'Profile');
     }
 
     /**
@@ -96,7 +95,7 @@ class AuthController extends Controller
         $user = $request->user();
         $user->update($request->validated());
 
-        return $this->successResponse([
+        return successResponse([
             'user' => $this->formatUserData($user),
         ], 'Profile updated successfully');
     }
@@ -109,7 +108,7 @@ class AuthController extends Controller
         $user = $request->user();
 
         if (! Hash::check($request->current_password, $user->password)) {
-            return $this->errorResponse('Current password is incorrect', 422);
+            return errorResponse('Current password is incorrect', 422);
         }
 
         $user->update([
@@ -119,7 +118,7 @@ class AuthController extends Controller
         // Revoke all tokens except current
         $user->tokens()->where('id', '!=', $user->currentAccessToken()->id)->delete();
 
-        return $this->successResponse([], 'Password changed successfully');
+        // return successResponse([], 'Password changed successfully');
     }
 
     /**
@@ -131,7 +130,7 @@ class AuthController extends Controller
         $cookie = Cookie::forget('auth_token');
         $request->user()->currentAccessToken()->delete();
 
-        return $this->successResponse([], 'Logged out successfully')->withCookie($cookie);
+        // return successResponse([], 'Logged out successfully')->withCookie($cookie);
     }
 
     /**
@@ -185,34 +184,5 @@ class AuthController extends Controller
             'is_active' => $user->is_active,
             'permissions' => $user->permissions,
         ];
-    }
-
-    /**
-     * Success response helper
-     */
-    private function successResponse($data = [], string $message = 'Success', int $status = 200)
-    {
-        return response()->json([
-            'success' => true,
-            'message' => $message,
-            'data' => $data,
-        ], $status);
-    }
-
-    /**
-     * Error response helper
-     */
-    private function errorResponse(string $message, int $status = 400, $errors = null)
-    {
-        $response = [
-            'success' => false,
-            'message' => $message,
-        ];
-
-        if ($errors) {
-            $response['errors'] = $errors;
-        }
-
-        return response()->json($response, $status);
     }
 }
