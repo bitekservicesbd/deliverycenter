@@ -17,8 +17,8 @@ class UpdateProfileRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required|string|max:255',
-            'phone' => 'sometimes|nullable|string|max:20',
-            'avatar' => 'sometimes|nullable|string|max:255',
+            // 'phone' => 'sometimes|nullable|string|max:20',
+            // 'avatar' => 'sometimes|nullable|string|max:255',
         ];
     }
 
@@ -27,8 +27,8 @@ class UpdateProfileRequest extends FormRequest
         return [
             'name.required' => 'Name is required',
             'name.max' => 'Name cannot exceed 255 characters',
-            'phone.max' => 'Phone cannot exceed 20 characters',
-            'avatar.max' => 'Avatar URL cannot exceed 255 characters',
+            // 'phone.max' => 'Phone cannot exceed 20 characters',
+            // 'avatar.max' => 'Avatar URL cannot exceed 255 characters',
         ];
     }
 

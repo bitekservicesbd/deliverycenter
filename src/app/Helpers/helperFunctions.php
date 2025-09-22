@@ -93,3 +93,30 @@ if (! function_exists('tenantDB')) {
         return DB::connection("tenant_{$tenantId}");
     }
 }
+
+if (! function_exists('successResponse')) {
+    function successResponse(array $data = [], string $message = 'Success', int $status = 200)
+    {
+        return response()->json([
+            'success' => true,
+            'message' => $message,
+            'data' => $data,
+        ], $status);
+    }
+}
+
+if (! function_exists('errorResponse')) {
+    function errorResponse(string $message, int $status = 400, $errors = null)
+    {
+        $response = [
+            'success' => false,
+            'message' => $message,
+        ];
+
+        if ($errors) {
+            $response['errors'] = $errors;
+        }
+
+        return response()->json($response, $status);
+    }
+}
