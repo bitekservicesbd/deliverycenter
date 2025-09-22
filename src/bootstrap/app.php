@@ -51,6 +51,7 @@ return Application::configure(basePath: dirname(__DIR__))
             '2fa' => \App\Http\Middleware\Google2FAMiddleware::class,
             'client' => \App\Http\Middleware\ClientMiddleware::class,
             'ai_agent_middleware' => \App\Http\Middleware\AiAgentMiddleware::class,
+            'cookie_set' => \App\Http\Middleware\SetCookieMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -36,7 +36,7 @@ class AuthController extends Controller
         $abilities = $this->getUserAbilities($user);
         $token = $user->createToken('tenant-token', $abilities)->plainTextToken;
 
-        $cookie = cookie('tenant_token', $token, 60 * 24 * 7); // 7 days
+        $cookie = cookie('auth_token', $token, (60 * 24) * 7); // 7 days
 
         // Update last login
         $user->update(['last_login_at' => now()]);
@@ -44,7 +44,8 @@ class AuthController extends Controller
         return $this->successResponse([
             'user' => $this->formatUserData($user),
             'tenant' => tenant('id'),
-            'abilities' => $abilities
+            'abilities' => $abilities,
+            'token' => $token,
         ], 'Login successful')->withCookie($cookie);
     }
 
@@ -54,7 +55,7 @@ class AuthController extends Controller
     public function verifyToken(Request $request)
     {
         $user = $request->user();
-        
+
         if (!$user || !$user->is_active) {
             return $this->errorResponse('Invalid or inactive user', 401);
         }
@@ -95,7 +96,7 @@ class AuthController extends Controller
     public function changePassword(ChangePasswordRequest $request)
     {
         $user = $request->user();
-        
+
         if (!Hash::check($request->current_password, $user->password)) {
             return $this->errorResponse('Current password is incorrect', 422);
         }
@@ -115,7 +116,8 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        $cookie = Cookie::forget('tenant_token');
+
+        $cookie = Cookie::forget('auth_token');
         $request->user()->currentAccessToken()->delete();
 
         return $this->successResponse([], 'Logged out successfully')->withCookie($cookie);
@@ -127,7 +129,7 @@ class AuthController extends Controller
     private function getUserAbilities(User $user): array
     {
         $abilities = [];
-        
+
         // Add role-based abilities
         switch ($user->user_type) {
             case 'admin':
@@ -145,12 +147,12 @@ class AuthController extends Controller
             default:
                 $abilities = ['profile.read'];
         }
-        
+
         // Add custom permissions
         if ($user->permissions) {
             $abilities = array_merge($abilities, $user->permissions);
         }
-        
+
         return array_unique($abilities);
     }
 
