@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Api\V1\Tenant;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\Tenant\ChangePasswordRequest;
-use App\Http\Requests\Api\V1\Tenant\UpdateProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Api\V1\Tenant\UpdateProfileRequest;
+use App\Http\Requests\Api\V1\Tenant\ChangePasswordRequest;
 
 class AuthController extends Controller
 {
@@ -53,10 +54,9 @@ class AuthController extends Controller
         $user->update(['last_login_at' => now()]);
 
         return $this->successResponse([
-            'user' => $this->formatUserData($user),
+            'user' => $user->toResource(),
             'tenant' => tenant('id'),
             'abilities' => $abilities,
-            'token' => $token,
         ], 'Login successful')->withCookie($cookie);
     }
 
