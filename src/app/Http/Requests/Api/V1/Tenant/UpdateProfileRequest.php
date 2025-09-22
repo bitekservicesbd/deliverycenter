@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class LoginRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -16,18 +16,19 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|max:255',
-            'password' => 'required|string|min:6',
+            'name' => 'sometimes|required|string|max:255',
+            'phone' => 'sometimes|nullable|string|max:20',
+            'avatar' => 'sometimes|nullable|string|max:255',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'email.required' => 'Email is required',
-            'email.email' => 'Please provide a valid email address',
-            'password.required' => 'Password is required',
-            'password.min' => 'Password must be at least 6 characters',
+            'name.required' => 'Name is required',
+            'name.max' => 'Name cannot exceed 255 characters',
+            'phone.max' => 'Phone cannot exceed 20 characters',
+            'avatar.max' => 'Avatar URL cannot exceed 255 characters',
         ];
     }
 

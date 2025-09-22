@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1\Tenant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Tenant\ChangePasswordRequest;
 use App\Http\Requests\Api\V1\Tenant\UpdateProfileRequest;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
@@ -16,11 +17,13 @@ class AuthController extends Controller
     /**
      * Handle tenant user login
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $user = User::where('email', $request->email)->first();
+        $validated = $request->validated();
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        $user = User::where('email', $validated['email'])->first();
+
+        if (! $user || ! Hash::check($validated['password'], $user->password)) {
             return errorResponse('Invalid credentials', 401);
         }
 
@@ -130,7 +133,7 @@ class AuthController extends Controller
         $cookie = Cookie::forget('auth_token');
         $request->user()->currentAccessToken()->delete();
 
-        // return successResponse([], 'Logged out successfully')->withCookie($cookie);
+        return successResponse([], 'Logged out successfully')->withCookie($cookie);
     }
 
     /**
