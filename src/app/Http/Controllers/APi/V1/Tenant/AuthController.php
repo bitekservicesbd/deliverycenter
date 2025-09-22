@@ -34,8 +34,8 @@ class AuthController extends Controller
 
         // $cookie = cookie('auth_token', $token, (60 * 24) * 7); // 7 days
 
-        // check if app is in production or not. if in production, set secure to true
-        $secure = Config::get('app.env') === 'production' ? true : false;
+        // * check if app is in local or not. if in not local that means apps is in production and then set secure to true
+        $secure = Config::get('app.env') !== 'local' ? true : false;
 
         $cookie = cookie(
             'auth_token',
