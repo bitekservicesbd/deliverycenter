@@ -63,24 +63,6 @@ class AuthController extends Controller
     }
 
     /**
-     * Verify token validity
-     */
-    public function verifyToken(Request $request)
-    {
-        $user = $request->user();
-
-        if (! $user || ! $user->is_active) {
-            return errorResponse('Invalid or inactive user', 401);
-        }
-
-        return successResponse([
-            'user' => $this->formatUserData($user),
-            'tenant' => tenant('id'),
-            'abilities' => $this->getUserAbilities($user),
-        ], 'Token is valid');
-    }
-
-    /**
      * Get user profile
      */
     public function profile(Request $request)
@@ -99,7 +81,7 @@ class AuthController extends Controller
         $user->update($request->validated());
 
         return successResponse([
-            'user' => $this->formatUserData($user),
+            'user' => $user->toResource(),
         ], 'Profile updated successfully');
     }
 
@@ -130,7 +112,6 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-
         $cookie = Cookie::forget('auth_token');
         $request->user()->currentAccessToken()->delete();
 
@@ -168,25 +149,5 @@ class AuthController extends Controller
         }
 
         return array_unique($abilities);
-    }
-
-    /**
-     * Format user data for response
-     */
-    private function formatUserData(User $user): array
-    {
-        return [
-            'id' => $user->id,
-            'name' => $user->name,
-            'email' => $user->email,
-            'phone' => $user->phone,
-            'user_type' => $user->user_type,
-            'employee_number' => $user->employee_number,
-            'hire_date' => $user->hire_date,
-            'avatar' => $user->avatar,
-            'last_login_at' => $user->last_login_at,
-            'is_active' => $user->is_active,
-            'permissions' => $user->permissions,
-        ];
     }
 }
