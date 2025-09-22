@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Api\V1\Tenant;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Contracts\Validation\Validator;
 
 class ChangePasswordRequest extends FormRequest
 {
@@ -39,7 +39,7 @@ class ChangePasswordRequest extends FormRequest
             response()->json([
                 'success' => false,
                 'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422)
         );
     }

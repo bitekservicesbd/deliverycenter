@@ -52,6 +52,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'client' => \App\Http\Middleware\ClientMiddleware::class,
             'ai_agent_middleware' => \App\Http\Middleware\AiAgentMiddleware::class,
             'cookie_set' => \App\Http\Middleware\SetCookieMiddleware::class,
+            'api_guest' => \App\Http\Middleware\Api\ApiGuestMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

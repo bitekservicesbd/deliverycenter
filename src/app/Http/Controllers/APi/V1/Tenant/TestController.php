@@ -14,7 +14,7 @@ class TestController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        
+
         return response()->json([
             'success' => true,
             'message' => 'Tenant API v1 is working perfectly! 🚀',
@@ -28,7 +28,7 @@ class TestController extends Controller
                 'timestamp' => now()->toISOString(),
                 'environment' => app()->environment(),
                 'laravel_version' => app()->version(),
-            ]
+            ],
         ]);
     }
 
@@ -38,9 +38,9 @@ class TestController extends Controller
     public function testDatabase(Request $request)
     {
         try {
-            $tables = DB::select("SHOW TABLES");
+            $tables = DB::select('SHOW TABLES');
             $userCount = DB::table('users')->count();
-            
+
             return response()->json([
                 'success' => true,
                 'message' => 'Database connection successful',
@@ -49,14 +49,14 @@ class TestController extends Controller
                     'database_name' => config('database.connections.tenant.database'),
                     'total_tables' => count($tables),
                     'user_count' => $userCount,
-                    'connection_status' => 'active'
-                ]
+                    'connection_status' => 'active',
+                ],
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Database connection failed',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -67,7 +67,7 @@ class TestController extends Controller
     public function testPermissions(Request $request)
     {
         $user = $request->user();
-        
+
         return response()->json([
             'success' => true,
             'message' => 'Permission check completed',
@@ -76,8 +76,8 @@ class TestController extends Controller
                 'permissions' => $user->permissions ?? [],
                 'is_admin' => $user->user_type === 'admin',
                 'can_access_settings' => in_array('settings.*', $user->permissions ?? []) || $user->user_type === 'admin',
-                'token_abilities' => $user->currentAccessToken()?->abilities ?? []
-            ]
+                'token_abilities' => $user->currentAccessToken()?->abilities ?? [],
+            ],
         ]);
     }
 }

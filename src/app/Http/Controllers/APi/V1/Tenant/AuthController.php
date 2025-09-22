@@ -3,17 +3,12 @@
 namespace App\Http\Controllers\Api\V1\Tenant;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
+use App\Http\Requests\Api\V1\Tenant\ChangePasswordRequest;
+use App\Http\Requests\Api\V1\Tenant\UpdateProfileRequest;
 use App\Models\User;
-use App\Http\Requests\Api\V1\Tenant\{
-    LoginRequest,
-    UpdateProfileRequest,
-    ChangePasswordRequest
-};
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -24,7 +19,7 @@ class AuthController extends Controller
     {
         $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (! $user || ! Hash::check($request->password, $user->password)) {
             return $this->errorResponse('Invalid credentials', 401);
         }
 
@@ -56,14 +51,14 @@ class AuthController extends Controller
     {
         $user = $request->user();
 
-        if (!$user || !$user->is_active) {
+        if (! $user || ! $user->is_active) {
             return $this->errorResponse('Invalid or inactive user', 401);
         }
 
         return $this->successResponse([
             'user' => $this->formatUserData($user),
             'tenant' => tenant('id'),
-            'abilities' => $this->getUserAbilities($user)
+            'abilities' => $this->getUserAbilities($user),
         ], 'Token is valid');
     }
 
@@ -73,7 +68,7 @@ class AuthController extends Controller
     public function profile(Request $request)
     {
         return $this->successResponse([
-            'user' => $this->formatUserData($request->user())
+            'user' => $this->formatUserData($request->user()),
         ]);
     }
 
@@ -86,7 +81,7 @@ class AuthController extends Controller
         $user->update($request->validated());
 
         return $this->successResponse([
-            'user' => $this->formatUserData($user)
+            'user' => $this->formatUserData($user),
         ], 'Profile updated successfully');
     }
 
@@ -97,12 +92,12 @@ class AuthController extends Controller
     {
         $user = $request->user();
 
-        if (!Hash::check($request->current_password, $user->password)) {
+        if (! Hash::check($request->current_password, $user->password)) {
             return $this->errorResponse('Current password is incorrect', 422);
         }
 
         $user->update([
-            'password' => Hash::make($request->new_password)
+            'password' => Hash::make($request->new_password),
         ]);
 
         // Revoke all tokens except current
@@ -184,7 +179,7 @@ class AuthController extends Controller
         return response()->json([
             'success' => true,
             'message' => $message,
-            'data' => $data
+            'data' => $data,
         ], $status);
     }
 
@@ -195,7 +190,7 @@ class AuthController extends Controller
     {
         $response = [
             'success' => false,
-            'message' => $message
+            'message' => $message,
         ];
 
         if ($errors) {

@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Http\Request;
 
 class SetCookieMiddleware extends Middleware
 {
@@ -24,7 +24,6 @@ class SetCookieMiddleware extends Middleware
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
      * @param  string  ...$guards
      * @return mixed
      */
@@ -33,13 +32,14 @@ class SetCookieMiddleware extends Middleware
         if (! $request->headers->has('authorization')) {
             if ($token = $request->cookie('auth_token')) {
 
-                $bearer = 'Bearer ' . $token;
+                $bearer = 'Bearer '.$token;
 
                 // Set both the header bag and the server param for maximum compatibility.
                 $request->headers->set('Authorization', $bearer);
                 $request->server->set('HTTP_AUTHORIZATION', $bearer);
             }
         }
+
         return $next($request);
     }
 }
