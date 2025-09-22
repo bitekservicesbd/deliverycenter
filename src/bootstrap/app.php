@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         api: __DIR__.'/../routes/api.php',
-        using: function () {
+        then: function () {
             Route::middleware(['web', 'auth', '2fa', 'ai_agent_middleware'])
                 ->prefix('central')
                 ->as('central.')
