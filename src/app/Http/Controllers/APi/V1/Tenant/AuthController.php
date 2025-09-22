@@ -7,6 +7,7 @@ use App\Http\Requests\Api\V1\Tenant\ChangePasswordRequest;
 use App\Http\Requests\Api\V1\Tenant\UpdateProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 
@@ -31,7 +32,22 @@ class AuthController extends Controller
         $abilities = $this->getUserAbilities($user);
         $token = $user->createToken('tenant-token', $abilities)->plainTextToken;
 
-        $cookie = cookie('auth_token', $token, (60 * 24) * 7); // 7 days
+        // $cookie = cookie('auth_token', $token, (60 * 24) * 7); // 7 days
+
+        // check if app is in production or not. if in production, set secure to true
+        $secure = Config::get('app.env') === 'production' ? true : false;
+
+        $cookie = cookie(
+            'auth_token',
+            $token,
+            (60 * 24) * 7, // 7 days
+            '/',         // path
+            null,        // domain (null = current domain)
+            $secure,        // secure (HTTPS only)
+            $secure,        // httpOnly
+            false,       // raw
+            'None'     // sameSite
+        );
 
         // Update last login
         $user->update(['last_login_at' => now()]);
