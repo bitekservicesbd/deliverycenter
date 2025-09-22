@@ -1,5 +1,5 @@
 <?php
-// database/migrations/tenant/2024_01_01_000018_create_price_plans_table.php
+// database/migrations/tenant/2024_09_22_000018_create_price_plans_table.php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
