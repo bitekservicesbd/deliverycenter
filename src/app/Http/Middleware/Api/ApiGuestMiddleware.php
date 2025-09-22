@@ -19,7 +19,7 @@ class ApiGuestMiddleware
         if (auth('sanctum')->check()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Already logged in.'
+                'message' => 'Already logged in.',
             ], 409);
         }
 
