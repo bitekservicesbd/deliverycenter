@@ -118,6 +118,14 @@ class AuthController extends Controller
         return successResponse([], 'Logged out successfully')->withCookie($cookie);
     }
 
+    public function forgetCookie(Request $request)
+    {
+        $cookie = Cookie::forget('auth_token');
+        return successResponse([], 'Cookie removed successfully')->withCookie($cookie);
+    }
+
+
+
     /**
      * Get user abilities based on role and permissions
      */
