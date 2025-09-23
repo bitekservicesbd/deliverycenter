@@ -16,11 +16,11 @@ class DeductionType extends Model
         'calculation_method',
         'rate',
         'gl_code',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
         'rate' => 'decimal:2',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Customer;
+use Illuminate\Database\Seeder;
 
 class CustomerSeeder extends Seeder
 {
@@ -24,10 +24,10 @@ class CustomerSeeder extends Seeder
                 'customer_type' => 'business',
                 'billing_group_id' => 1,
                 'credit_limit' => 25000.00,
-                'payment_terms' => 'NET30'
+                'payment_terms' => 'NET30',
             ],
             [
-                'customer_number' => 'CUST002', 
+                'customer_number' => 'CUST002',
                 'name' => 'Medical Supplies Direct',
                 'contact_person' => 'Dr. Robert Chen',
                 'email' => 'shipping@medsupplies.ca',
@@ -40,7 +40,7 @@ class CustomerSeeder extends Seeder
                 'customer_type' => 'business',
                 'billing_group_id' => 1,
                 'credit_limit' => 50000.00,
-                'payment_terms' => 'NET15'
+                'payment_terms' => 'NET15',
             ],
             [
                 'customer_number' => 'CUST003',
@@ -56,7 +56,7 @@ class CustomerSeeder extends Seeder
                 'customer_type' => 'retail',
                 'billing_group_id' => 3,
                 'credit_limit' => 10000.00,
-                'payment_terms' => 'COD'
+                'payment_terms' => 'COD',
             ],
             [
                 'customer_number' => 'CUST004',
@@ -72,8 +72,8 @@ class CustomerSeeder extends Seeder
                 'customer_type' => 'business',
                 'billing_group_id' => 4,
                 'credit_limit' => 100000.00,
-                'payment_terms' => 'NET45'
-            ]
+                'payment_terms' => 'NET45',
+            ],
         ];
 
         foreach ($customers as $customer) {

@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Weather;
-use Illuminate\Database\Seeder;
-use App\Models\WeatherAlert;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 class WeatherAlertSeeder extends Seeder
 {
@@ -26,10 +25,10 @@ class WeatherAlertSeeder extends Seeder
                     'recommended_actions' => [
                         'reschedule_non_urgent_deliveries',
                         'increase_delivery_windows',
-                        'monitor_driver_safety'
-                    ]
+                        'monitor_driver_safety',
+                    ],
                 ]),
-                'auto_notifications_sent' => false
+                'auto_notifications_sent' => false,
             ],
             [
                 'alert_type' => 'fog',
@@ -45,10 +44,10 @@ class WeatherAlertSeeder extends Seeder
                     'recommended_actions' => [
                         'use_alternate_routes',
                         'extend_delivery_windows',
-                        'increase_following_distance'
-                    ]
+                        'increase_following_distance',
+                    ],
                 ]),
-                'auto_notifications_sent' => true
+                'auto_notifications_sent' => true,
             ],
             [
                 'alert_type' => 'heat_wave',
@@ -65,11 +64,11 @@ class WeatherAlertSeeder extends Seeder
                         'schedule_early_morning_deliveries',
                         'monitor_temperature_sensitive_goods',
                         'ensure_driver_hydration',
-                        'check_refrigeration_units'
-                    ]
+                        'check_refrigeration_units',
+                    ],
                 ]),
-                'auto_notifications_sent' => false
-            ]
+                'auto_notifications_sent' => false,
+            ],
         ];
 
         foreach ($weatherAlerts as $alert) {

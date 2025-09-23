@@ -20,7 +20,7 @@ class FuelSurchargePlan extends Model
         'effective_date',
         'auto_update',
         'fuel_index_source',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -29,6 +29,6 @@ class FuelSurchargePlan extends Model
         'rate_table' => 'array',
         'effective_date' => 'date',
         'auto_update' => 'boolean',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

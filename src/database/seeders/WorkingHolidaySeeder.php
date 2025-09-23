@@ -1,10 +1,11 @@
 <?php
+
 // database/seeders/WorkingHolidaySeeder.php
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\WorkingHoliday;
+use Illuminate\Database\Seeder;
 
 class WorkingHolidaySeeder extends Seeder
 {
@@ -19,7 +20,7 @@ class WorkingHolidaySeeder extends Seeder
                 'end_time' => null,
                 'is_working_day' => false,
                 'notes' => 'New Year\'s Day statutory holiday - no deliveries',
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'Good Friday',
@@ -29,7 +30,7 @@ class WorkingHolidaySeeder extends Seeder
                 'end_time' => null,
                 'is_working_day' => false,
                 'notes' => 'Good Friday statutory holiday - office closed',
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'Victoria Day',
@@ -39,7 +40,7 @@ class WorkingHolidaySeeder extends Seeder
                 'end_time' => null,
                 'is_working_day' => false,
                 'notes' => 'Victoria Day statutory holiday (except Quebec)',
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'Canada Day',
@@ -49,7 +50,7 @@ class WorkingHolidaySeeder extends Seeder
                 'end_time' => null,
                 'is_working_day' => false,
                 'notes' => 'Canada Day statutory holiday - all operations closed',
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'Labour Day',
@@ -59,7 +60,7 @@ class WorkingHolidaySeeder extends Seeder
                 'end_time' => null,
                 'is_working_day' => false,
                 'notes' => 'Labour Day statutory holiday - no operations',
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'Thanksgiving',
@@ -69,7 +70,7 @@ class WorkingHolidaySeeder extends Seeder
                 'end_time' => null,
                 'is_working_day' => false,
                 'notes' => 'Canadian Thanksgiving - limited operations in some provinces',
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'Christmas Day',
@@ -79,7 +80,7 @@ class WorkingHolidaySeeder extends Seeder
                 'end_time' => null,
                 'is_working_day' => false,
                 'notes' => 'Christmas Day statutory holiday - all operations closed',
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'Boxing Day',
@@ -89,7 +90,7 @@ class WorkingHolidaySeeder extends Seeder
                 'end_time' => '16:00:00',
                 'is_working_day' => true,
                 'notes' => 'Boxing Day - limited operations with reduced hours',
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'Family Day (Ontario)',
@@ -99,7 +100,7 @@ class WorkingHolidaySeeder extends Seeder
                 'end_time' => null,
                 'is_working_day' => false,
                 'notes' => 'Family Day provincial holiday - Ontario, Alberta, BC, Saskatchewan, New Brunswick',
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'Company Maintenance Day',
@@ -109,7 +110,7 @@ class WorkingHolidaySeeder extends Seeder
                 'end_time' => '15:00:00',
                 'is_working_day' => true,
                 'notes' => 'Year-end maintenance and inventory - limited staff on duty',
-                'is_active' => true
+                'is_active' => true,
             ],
         ];
 

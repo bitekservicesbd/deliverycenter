@@ -27,7 +27,7 @@ class UserSecuritySetting extends Model
         'allow_view_pricing',
         'allow_importer',
         'allow_custom_order',
-        'allow_global_address_list'
+        'allow_global_address_list',
     ];
 
     protected $casts = [
@@ -47,7 +47,7 @@ class UserSecuritySetting extends Model
         'allow_view_pricing' => 'boolean',
         'allow_importer' => 'boolean',
         'allow_custom_order' => 'boolean',
-        'allow_global_address_list' => 'boolean'
+        'allow_global_address_list' => 'boolean',
     ];
 
     public function user()

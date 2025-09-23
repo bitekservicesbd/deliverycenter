@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Carrier;
+use Illuminate\Database\Seeder;
 
 class CarrierSeeder extends Seeder
 {
@@ -25,7 +25,7 @@ class CarrierSeeder extends Seeder
                 'service_areas' => json_encode(['GTA', 'Southern Ontario']),
                 'vehicle_types' => json_encode(['van', 'truck']),
                 'insurance_coverage' => 1000000.00,
-                'bond_amount' => 50000.00
+                'bond_amount' => 50000.00,
             ],
             [
                 'name' => 'Metro Delivery Solutions',
@@ -42,7 +42,7 @@ class CarrierSeeder extends Seeder
                 'service_areas' => json_encode(['Ontario', 'Quebec']),
                 'vehicle_types' => json_encode(['truck', 'trailer']),
                 'insurance_coverage' => 2000000.00,
-                'bond_amount' => 100000.00
+                'bond_amount' => 100000.00,
             ],
             [
                 'name' => 'Express Courier Network',
@@ -59,7 +59,7 @@ class CarrierSeeder extends Seeder
                 'service_areas' => json_encode(['GTA', 'Golden Horseshoe']),
                 'vehicle_types' => json_encode(['motorcycle', 'van']),
                 'insurance_coverage' => 500000.00,
-                'bond_amount' => 25000.00
+                'bond_amount' => 25000.00,
             ],
             [
                 'name' => 'Northern Routes Transport',
@@ -76,8 +76,8 @@ class CarrierSeeder extends Seeder
                 'service_areas' => json_encode(['Northern Ontario', 'Western Canada']),
                 'vehicle_types' => json_encode(['truck', 'trailer', 'flatbed']),
                 'insurance_coverage' => 5000000.00,
-                'bond_amount' => 250000.00
-            ]
+                'bond_amount' => 250000.00,
+            ],
         ];
 
         foreach ($carriers as $carrier) {

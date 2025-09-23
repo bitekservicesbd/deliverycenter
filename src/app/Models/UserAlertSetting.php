@@ -24,7 +24,7 @@ class UserAlertSetting extends Model
         'cancelled_email',
         'cancelled_sms',
         'invoice_alerts',
-        'statement_alerts'
+        'statement_alerts',
     ];
 
     protected $casts = [
@@ -41,7 +41,7 @@ class UserAlertSetting extends Model
         'cancelled_email' => 'boolean',
         'cancelled_sms' => 'boolean',
         'invoice_alerts' => 'boolean',
-        'statement_alerts' => 'boolean'
+        'statement_alerts' => 'boolean',
     ];
 
     public function user()

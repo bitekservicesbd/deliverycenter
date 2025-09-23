@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\UserAlertSetting;
+use Illuminate\Database\Seeder;
 
 class UserAlertSettingSeeder extends Seeder
 {
@@ -25,7 +25,7 @@ class UserAlertSettingSeeder extends Seeder
                 'cancelled_email' => true,
                 'cancelled_sms' => true,
                 'invoice_alerts' => true,
-                'statement_alerts' => true
+                'statement_alerts' => true,
             ],
             [
                 'user_id' => 2, // Dispatcher user (if exists)
@@ -42,8 +42,8 @@ class UserAlertSettingSeeder extends Seeder
                 'cancelled_email' => true,
                 'cancelled_sms' => true,
                 'invoice_alerts' => false,
-                'statement_alerts' => false
-            ]
+                'statement_alerts' => false,
+            ],
         ];
 
         foreach ($userAlertSettings as $setting) {

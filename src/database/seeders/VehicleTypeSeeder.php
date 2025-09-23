@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\VehicleType;
+use Illuminate\Database\Seeder;
 
 class VehicleTypeSeeder extends Seeder
 {
@@ -20,7 +20,7 @@ class VehicleTypeSeeder extends Seeder
                 'vehicle_class' => 'light_duty',
                 'equipment_requirements' => json_encode(['delivery_box', 'gps_tracker']),
                 'license_requirements' => json_encode(['motorcycle_license']),
-                'typical_uses' => json_encode(['same_day', 'express', 'documents'])
+                'typical_uses' => json_encode(['same_day', 'express', 'documents']),
             ],
             [
                 'name' => 'Cargo Van',
@@ -32,7 +32,7 @@ class VehicleTypeSeeder extends Seeder
                 'vehicle_class' => 'light_duty',
                 'equipment_requirements' => json_encode(['dolly', 'straps', 'gps_tracker']),
                 'license_requirements' => json_encode(['class_g_license']),
-                'typical_uses' => json_encode(['local_delivery', 'courier', 'small_freight'])
+                'typical_uses' => json_encode(['local_delivery', 'courier', 'small_freight']),
             ],
             [
                 'name' => 'Cube Truck',
@@ -44,7 +44,7 @@ class VehicleTypeSeeder extends Seeder
                 'vehicle_class' => 'medium_duty',
                 'equipment_requirements' => json_encode(['lift_gate', 'dolly', 'straps', 'gps_tracker']),
                 'license_requirements' => json_encode(['class_g_license', 'dz_license']),
-                'typical_uses' => json_encode(['ltl_freight', 'furniture_delivery', 'appliances'])
+                'typical_uses' => json_encode(['ltl_freight', 'furniture_delivery', 'appliances']),
             ],
             [
                 'name' => 'Straight Truck',
@@ -56,7 +56,7 @@ class VehicleTypeSeeder extends Seeder
                 'vehicle_class' => 'heavy_duty',
                 'equipment_requirements' => json_encode(['hydraulic_lift', 'loading_ramp', 'gps_tracker']),
                 'license_requirements' => json_encode(['dz_license', 'air_brake_endorsement']),
-                'typical_uses' => json_encode(['freight_delivery', 'industrial_equipment', 'bulk_goods'])
+                'typical_uses' => json_encode(['freight_delivery', 'industrial_equipment', 'bulk_goods']),
             ],
             [
                 'name' => 'Tractor Trailer',
@@ -68,7 +68,7 @@ class VehicleTypeSeeder extends Seeder
                 'vehicle_class' => 'commercial',
                 'equipment_requirements' => json_encode(['electronic_logs', 'gps_tracker', 'safety_equipment']),
                 'license_requirements' => json_encode(['az_license', 'air_brake_endorsement', 'dangerous_goods']),
-                'typical_uses' => json_encode(['long_haul', 'truckload', 'cross_country'])
+                'typical_uses' => json_encode(['long_haul', 'truckload', 'cross_country']),
             ],
             [
                 'name' => 'Refrigerated Truck',
@@ -80,8 +80,8 @@ class VehicleTypeSeeder extends Seeder
                 'vehicle_class' => 'specialized',
                 'equipment_requirements' => json_encode(['refrigeration_unit', 'temperature_monitoring', 'gps_tracker']),
                 'license_requirements' => json_encode(['dz_license', 'temperature_controlled_endorsement']),
-                'typical_uses' => json_encode(['cold_chain', 'pharmaceuticals', 'food_delivery'])
-            ]
+                'typical_uses' => json_encode(['cold_chain', 'pharmaceuticals', 'food_delivery']),
+            ],
         ];
 
         foreach ($vehicleTypes as $vehicleType) {

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Warehouse;
+use Illuminate\Database\Seeder;
 
 class WarehouseSeeder extends Seeder
 {
@@ -33,7 +33,7 @@ class WarehouseSeeder extends Seeder
                     'thursday' => ['open' => '06:00', 'close' => '22:00'],
                     'friday' => ['open' => '06:00', 'close' => '22:00'],
                     'saturday' => ['open' => '08:00', 'close' => '18:00'],
-                    'sunday' => ['open' => '10:00', 'close' => '16:00']
+                    'sunday' => ['open' => '10:00', 'close' => '16:00'],
                 ]),
                 'equipment_available' => json_encode([
                     'forklifts' => 12,
@@ -41,8 +41,8 @@ class WarehouseSeeder extends Seeder
                     'reach_trucks' => 4,
                     'dock_levelers' => 24,
                     'conveyor_systems' => true,
-                    'automated_sorting' => true
-                ])
+                    'automated_sorting' => true,
+                ]),
             ],
             [
                 'warehouse_code' => 'WH-MTL-001',
@@ -67,7 +67,7 @@ class WarehouseSeeder extends Seeder
                     'thursday' => ['open' => '05:00', 'close' => '21:00'],
                     'friday' => ['open' => '05:00', 'close' => '21:00'],
                     'saturday' => ['open' => '07:00', 'close' => '17:00'],
-                    'sunday' => ['open' => null, 'close' => null]
+                    'sunday' => ['open' => null, 'close' => null],
                 ]),
                 'equipment_available' => json_encode([
                     'forklifts' => 8,
@@ -75,8 +75,8 @@ class WarehouseSeeder extends Seeder
                     'reach_trucks' => 2,
                     'dock_levelers' => 18,
                     'conveyor_systems' => true,
-                    'automated_sorting' => false
-                ])
+                    'automated_sorting' => false,
+                ]),
             ],
             [
                 'warehouse_code' => 'WH-VAN-001',
@@ -101,7 +101,7 @@ class WarehouseSeeder extends Seeder
                     'thursday' => ['open' => '24/7', 'close' => '24/7'],
                     'friday' => ['open' => '24/7', 'close' => '24/7'],
                     'saturday' => ['open' => '24/7', 'close' => '24/7'],
-                    'sunday' => ['open' => '24/7', 'close' => '24/7']
+                    'sunday' => ['open' => '24/7', 'close' => '24/7'],
                 ]),
                 'equipment_available' => json_encode([
                     'forklifts' => 20,
@@ -111,8 +111,8 @@ class WarehouseSeeder extends Seeder
                     'container_cranes' => 4,
                     'rail_access' => true,
                     'conveyor_systems' => true,
-                    'automated_sorting' => true
-                ])
+                    'automated_sorting' => true,
+                ]),
             ],
             [
                 'warehouse_code' => 'WH-CAL-001',
@@ -137,7 +137,7 @@ class WarehouseSeeder extends Seeder
                     'thursday' => ['open' => '06:00', 'close' => '20:00'],
                     'friday' => ['open' => '06:00', 'close' => '20:00'],
                     'saturday' => ['open' => '08:00', 'close' => '16:00'],
-                    'sunday' => ['open' => null, 'close' => null]
+                    'sunday' => ['open' => null, 'close' => null],
                 ]),
                 'equipment_available' => json_encode([
                     'forklifts' => 6,
@@ -145,9 +145,9 @@ class WarehouseSeeder extends Seeder
                     'reach_trucks' => 2,
                     'dock_levelers' => 14,
                     'conveyor_systems' => false,
-                    'automated_sorting' => false
-                ])
-            ]
+                    'automated_sorting' => false,
+                ]),
+            ],
         ];
 
         foreach ($warehouses as $warehouse) {

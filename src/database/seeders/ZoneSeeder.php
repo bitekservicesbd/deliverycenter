@@ -1,10 +1,11 @@
 <?php
+
 // database/seeders/ZoneSeeder.php
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Zone;
+use Illuminate\Database\Seeder;
 
 class ZoneSeeder extends Seeder
 {
@@ -19,7 +20,7 @@ class ZoneSeeder extends Seeder
                 'cities' => json_encode(['Toronto', 'Mississauga', 'Brampton', 'Markham', 'Vaughan', 'Richmond Hill', 'Oakville', 'Burlington']),
                 'provinces' => json_encode(['ON']),
                 'base_rate' => 15.00,
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'Montreal Metro',
@@ -29,7 +30,7 @@ class ZoneSeeder extends Seeder
                 'cities' => json_encode(['Montreal', 'Laval', 'Longueuil', 'Terrebonne', 'Brossard', 'Saint-Jean-sur-Richelieu', 'Repentigny', 'Dollard-des-Ormeaux']),
                 'provinces' => json_encode(['QC']),
                 'base_rate' => 18.00,
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'Vancouver Metro',
@@ -39,7 +40,7 @@ class ZoneSeeder extends Seeder
                 'cities' => json_encode(['Vancouver', 'Surrey', 'Burnaby', 'Richmond', 'Coquitlam', 'Langley', 'North Vancouver', 'West Vancouver']),
                 'provinces' => json_encode(['BC']),
                 'base_rate' => 20.00,
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'Calgary Metro',
@@ -49,7 +50,7 @@ class ZoneSeeder extends Seeder
                 'cities' => json_encode(['Calgary', 'Airdrie', 'Cochrane', 'Chestermere', 'Okotoks', 'Strathmore']),
                 'provinces' => json_encode(['AB']),
                 'base_rate' => 16.00,
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'Edmonton Metro',
@@ -59,7 +60,7 @@ class ZoneSeeder extends Seeder
                 'cities' => json_encode(['Edmonton', 'Sherwood Park', 'St. Albert', 'Spruce Grove', 'Leduc', 'Fort Saskatchewan']),
                 'provinces' => json_encode(['AB']),
                 'base_rate' => 16.00,
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'Ottawa Metro',
@@ -69,7 +70,7 @@ class ZoneSeeder extends Seeder
                 'cities' => json_encode(['Ottawa', 'Gatineau', 'Kanata', 'Orleans', 'Nepean', 'Gloucester', 'Hull']),
                 'provinces' => json_encode(['ON', 'QC']),
                 'base_rate' => 17.00,
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'Winnipeg Metro',
@@ -79,7 +80,7 @@ class ZoneSeeder extends Seeder
                 'cities' => json_encode(['Winnipeg', 'East St. Paul', 'West St. Paul', 'Selkirk', 'Steinbach']),
                 'provinces' => json_encode(['MB']),
                 'base_rate' => 14.00,
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'Halifax Metro',
@@ -89,8 +90,8 @@ class ZoneSeeder extends Seeder
                 'cities' => json_encode(['Halifax', 'Dartmouth', 'Bedford', 'Sackville', 'Eastern Passage', 'Cole Harbour']),
                 'provinces' => json_encode(['NS']),
                 'base_rate' => 19.00,
-                'is_active' => true
-            ]
+                'is_active' => true,
+            ],
         ];
 
         foreach ($zones as $zone) {

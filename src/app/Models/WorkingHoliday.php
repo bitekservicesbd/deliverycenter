@@ -19,7 +19,7 @@ class WorkingHoliday extends Model
         'special_rates',
         'regions_affected',
         'description',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -29,6 +29,6 @@ class WorkingHoliday extends Model
         'affects_pickup' => 'boolean',
         'special_rates' => 'array',
         'regions_affected' => 'array',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

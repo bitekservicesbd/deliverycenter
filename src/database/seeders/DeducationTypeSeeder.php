@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\DeductionType;
+use Illuminate\Database\Seeder;
 
 class DeductionTypeSeeder extends Seeder
 {
@@ -18,7 +18,7 @@ class DeductionTypeSeeder extends Seeder
                 'default_amount' => 10.00,
                 'min_threshold' => 1000.00,
                 'max_deduction' => 500.00,
-                'applies_to' => 'base_charges'
+                'applies_to' => 'base_charges',
             ],
             [
                 'name' => 'Customer Loyalty',
@@ -28,7 +28,7 @@ class DeductionTypeSeeder extends Seeder
                 'default_amount' => 5.00,
                 'min_threshold' => 500.00,
                 'max_deduction' => 250.00,
-                'applies_to' => 'total_charges'
+                'applies_to' => 'total_charges',
             ],
             [
                 'name' => 'Promotional Discount',
@@ -38,7 +38,7 @@ class DeductionTypeSeeder extends Seeder
                 'default_amount' => 25.00,
                 'min_threshold' => 100.00,
                 'max_deduction' => 100.00,
-                'applies_to' => 'total_charges'
+                'applies_to' => 'total_charges',
             ],
             [
                 'name' => 'Early Payment',
@@ -48,7 +48,7 @@ class DeductionTypeSeeder extends Seeder
                 'default_amount' => 2.00,
                 'min_threshold' => 0.00,
                 'max_deduction' => 100.00,
-                'applies_to' => 'total_charges'
+                'applies_to' => 'total_charges',
             ],
             [
                 'name' => 'Bulk Order',
@@ -58,8 +58,8 @@ class DeductionTypeSeeder extends Seeder
                 'default_amount' => 15.00,
                 'min_threshold' => 2000.00,
                 'max_deduction' => 1000.00,
-                'applies_to' => 'base_charges'
-            ]
+                'applies_to' => 'base_charges',
+            ],
         ];
 
         foreach ($deductionTypes as $type) {

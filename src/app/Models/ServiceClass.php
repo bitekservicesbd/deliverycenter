@@ -17,7 +17,7 @@ class ServiceClass extends Model
         'cutoff_time',
         'base_rate',
         'delivery_options',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -25,6 +25,6 @@ class ServiceClass extends Model
         'cutoff_time' => 'time',
         'base_rate' => 'decimal:2',
         'delivery_options' => 'array',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

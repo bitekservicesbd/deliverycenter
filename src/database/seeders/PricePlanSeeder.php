@@ -1,10 +1,9 @@
 <?php
 
-
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\PricePlan;
+use Illuminate\Database\Seeder;
 
 class PricePlanSeeder extends Seeder
 {
@@ -23,14 +22,14 @@ class PricePlanSeeder extends Seeder
                 'zone_pricing' => json_encode([
                     'local' => ['base' => 15.00, 'per_km' => 1.00],
                     'regional' => ['base' => 25.00, 'per_km' => 1.50],
-                    'national' => ['base' => 45.00, 'per_km' => 2.00]
+                    'national' => ['base' => 45.00, 'per_km' => 2.00],
                 ]),
                 'weight_breaks' => json_encode([
                     ['max_weight' => 5, 'rate' => 2.50],
                     ['max_weight' => 15, 'rate' => 2.25],
                     ['max_weight' => 50, 'rate' => 2.00],
-                    ['max_weight' => null, 'rate' => 1.75]
-                ])
+                    ['max_weight' => null, 'rate' => 1.75],
+                ]),
             ],
             [
                 'name' => 'Premium Pricing',
@@ -44,14 +43,14 @@ class PricePlanSeeder extends Seeder
                 'zone_pricing' => json_encode([
                     'local' => ['base' => 25.00, 'per_km' => 1.50],
                     'regional' => ['base' => 40.00, 'per_km' => 2.00],
-                    'national' => ['base' => 65.00, 'per_km' => 2.50]
+                    'national' => ['base' => 65.00, 'per_km' => 2.50],
                 ]),
                 'weight_breaks' => json_encode([
                     ['max_weight' => 5, 'rate' => 3.00],
                     ['max_weight' => 15, 'rate' => 2.75],
                     ['max_weight' => 50, 'rate' => 2.50],
-                    ['max_weight' => null, 'rate' => 2.25]
-                ])
+                    ['max_weight' => null, 'rate' => 2.25],
+                ]),
             ],
             [
                 'name' => 'Express Pricing',
@@ -65,14 +64,14 @@ class PricePlanSeeder extends Seeder
                 'zone_pricing' => json_encode([
                     'local' => ['base' => 35.00, 'per_km' => 2.00],
                     'regional' => ['base' => 55.00, 'per_km' => 2.75],
-                    'national' => ['base' => 85.00, 'per_km' => 3.50]
+                    'national' => ['base' => 85.00, 'per_km' => 3.50],
                 ]),
                 'weight_breaks' => json_encode([
                     ['max_weight' => 5, 'rate' => 4.00],
                     ['max_weight' => 15, 'rate' => 3.75],
                     ['max_weight' => 50, 'rate' => 3.50],
-                    ['max_weight' => null, 'rate' => 3.25]
-                ])
+                    ['max_weight' => null, 'rate' => 3.25],
+                ]),
             ],
             [
                 'name' => 'Volume Discount',
@@ -86,15 +85,15 @@ class PricePlanSeeder extends Seeder
                 'zone_pricing' => json_encode([
                     'local' => ['base' => 12.00, 'per_km' => 0.80],
                     'regional' => ['base' => 20.00, 'per_km' => 1.20],
-                    'national' => ['base' => 35.00, 'per_km' => 1.60]
+                    'national' => ['base' => 35.00, 'per_km' => 1.60],
                 ]),
                 'weight_breaks' => json_encode([
                     ['max_weight' => 5, 'rate' => 2.00],
                     ['max_weight' => 15, 'rate' => 1.75],
                     ['max_weight' => 50, 'rate' => 1.50],
-                    ['max_weight' => null, 'rate' => 1.25]
-                ])
-            ]
+                    ['max_weight' => null, 'rate' => 1.25],
+                ]),
+            ],
         ];
 
         foreach ($pricePlans as $plan) {

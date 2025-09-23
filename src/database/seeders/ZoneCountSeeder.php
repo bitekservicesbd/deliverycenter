@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\ZoneCount;
+use Illuminate\Database\Seeder;
 
 class ZoneCountSeeder extends Seeder
 {
@@ -19,7 +19,7 @@ class ZoneCountSeeder extends Seeder
                 'total_weight' => 15750.50,
                 'total_revenue' => 45250.75,
                 'avg_delivery_time' => 2.5,
-                'success_rate' => 98.5
+                'success_rate' => 98.5,
             ],
             [
                 'zone_id' => 2, // GTA Extended
@@ -30,7 +30,7 @@ class ZoneCountSeeder extends Seeder
                 'total_weight' => 12450.25,
                 'total_revenue' => 35890.50,
                 'avg_delivery_time' => 3.2,
-                'success_rate' => 97.8
+                'success_rate' => 97.8,
             ],
             [
                 'zone_id' => 3, // Southern Ontario
@@ -41,7 +41,7 @@ class ZoneCountSeeder extends Seeder
                 'total_weight' => 8950.75,
                 'total_revenue' => 28750.25,
                 'avg_delivery_time' => 24.0,
-                'success_rate' => 96.2
+                'success_rate' => 96.2,
             ],
             [
                 'zone_id' => 4, // Quebec Metro
@@ -52,7 +52,7 @@ class ZoneCountSeeder extends Seeder
                 'total_weight' => 10250.00,
                 'total_revenue' => 32500.00,
                 'avg_delivery_time' => 4.5,
-                'success_rate' => 97.1
+                'success_rate' => 97.1,
             ],
             [
                 'zone_id' => 5, // Western Canada
@@ -63,7 +63,7 @@ class ZoneCountSeeder extends Seeder
                 'total_weight' => 5850.50,
                 'total_revenue' => 18950.75,
                 'avg_delivery_time' => 120.0,
-                'success_rate' => 94.5
+                'success_rate' => 94.5,
             ],
             [
                 'zone_id' => 6, // Atlantic Canada
@@ -74,7 +74,7 @@ class ZoneCountSeeder extends Seeder
                 'total_weight' => 4250.25,
                 'total_revenue' => 15750.50,
                 'avg_delivery_time' => 96.0,
-                'success_rate' => 95.8
+                'success_rate' => 95.8,
             ],
             [
                 'zone_id' => 7, // Remote Areas
@@ -85,7 +85,7 @@ class ZoneCountSeeder extends Seeder
                 'total_weight' => 1250.00,
                 'total_revenue' => 8950.00,
                 'avg_delivery_time' => 240.0,
-                'success_rate' => 89.5
+                'success_rate' => 89.5,
             ],
             [
                 'zone_id' => 8, // Express Priority
@@ -96,8 +96,8 @@ class ZoneCountSeeder extends Seeder
                 'total_weight' => 2850.75,
                 'total_revenue' => 18750.50,
                 'avg_delivery_time' => 4.0,
-                'success_rate' => 99.2
-            ]
+                'success_rate' => 99.2,
+            ],
         ];
 
         foreach ($zoneCounts as $count) {

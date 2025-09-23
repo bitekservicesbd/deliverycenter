@@ -25,7 +25,7 @@ class Asset extends Model
         'has_tailgate',
         'temperature_controlled',
         'assigned_carrier_id',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -34,7 +34,7 @@ class Asset extends Model
         'capacity_volume' => 'decimal:2',
         'has_tailgate' => 'boolean',
         'temperature_controlled' => 'boolean',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     public function assignedCarrier()

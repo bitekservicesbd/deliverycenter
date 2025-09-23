@@ -17,14 +17,14 @@ class ZoneGroup extends Model
         'default_service_days',
         'special_handling',
         'pricing_multiplier',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
         'default_service_days' => 'integer',
         'special_handling' => 'array',
         'pricing_multiplier' => 'decimal:2',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     public function zones()

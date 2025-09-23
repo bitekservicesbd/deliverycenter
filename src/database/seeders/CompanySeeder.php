@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Company;
+use Illuminate\Database\Seeder;
 
 class CompanySeeder extends Seeder
 {
@@ -27,7 +27,7 @@ class CompanySeeder extends Seeder
                 'company_size' => 'medium',
                 'annual_revenue' => 5000000.00,
                 'incorporated_date' => '2020-01-15',
-                'logo_url' => '/assets/company-logo.png'
+                'logo_url' => '/assets/company-logo.png',
             ],
             [
                 'name' => 'Regional Transport Co.',
@@ -46,8 +46,8 @@ class CompanySeeder extends Seeder
                 'company_size' => 'large',
                 'annual_revenue' => 15000000.00,
                 'incorporated_date' => '2018-06-01',
-                'logo_url' => '/assets/regional-transport-logo.png'
-            ]
+                'logo_url' => '/assets/regional-transport-logo.png',
+            ],
         ];
 
         foreach ($companies as $company) {

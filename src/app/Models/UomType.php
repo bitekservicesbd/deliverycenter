@@ -16,13 +16,13 @@ class UomType extends Model
         'conversion_factor',
         'is_base_unit',
         'is_default',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
         'conversion_factor' => 'decimal:6',
         'is_base_unit' => 'boolean',
         'is_default' => 'boolean',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

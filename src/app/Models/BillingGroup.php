@@ -17,11 +17,11 @@ class BillingGroup extends Model
         'invoice_template',
         'payment_terms_id',
         'gl_code',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     public function paymentTerms()

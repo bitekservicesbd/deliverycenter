@@ -1,10 +1,9 @@
 <?php
 
-
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\CommissionPlan;
+use Illuminate\Database\Seeder;
 
 class CommissionPlanSeeder extends Seeder
 {
@@ -22,8 +21,8 @@ class CommissionPlanSeeder extends Seeder
                 'tier_structure' => json_encode([
                     ['min_amount' => 0, 'max_amount' => 1000, 'rate' => 3.00],
                     ['min_amount' => 1000, 'max_amount' => 5000, 'rate' => 5.00],
-                    ['min_amount' => 5000, 'max_amount' => null, 'rate' => 7.00]
-                ])
+                    ['min_amount' => 5000, 'max_amount' => null, 'rate' => 7.00],
+                ]),
             ],
             [
                 'name' => 'Driver Performance Bonus',
@@ -36,8 +35,8 @@ class CommissionPlanSeeder extends Seeder
                 'tier_structure' => json_encode([
                     ['deliveries_count' => 10, 'bonus' => 50.00],
                     ['deliveries_count' => 25, 'bonus' => 100.00],
-                    ['deliveries_count' => 50, 'bonus' => 200.00]
-                ])
+                    ['deliveries_count' => 50, 'bonus' => 200.00],
+                ]),
             ],
             [
                 'name' => 'Premium Account Manager',
@@ -50,9 +49,9 @@ class CommissionPlanSeeder extends Seeder
                 'tier_structure' => json_encode([
                     ['min_amount' => 100, 'max_amount' => 2000, 'rate' => 6.00],
                     ['min_amount' => 2000, 'max_amount' => 10000, 'rate' => 8.00],
-                    ['min_amount' => 10000, 'max_amount' => null, 'rate' => 10.00]
-                ])
-            ]
+                    ['min_amount' => 10000, 'max_amount' => null, 'rate' => 10.00],
+                ]),
+            ],
         ];
 
         foreach ($commissionPlans as $plan) {

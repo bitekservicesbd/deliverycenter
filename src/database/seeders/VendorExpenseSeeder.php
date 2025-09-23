@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\VendorExpense;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 class VendorExpenseSeeder extends Seeder
 {
@@ -23,7 +23,7 @@ class VendorExpenseSeeder extends Seeder
                 'status' => 'paid',
                 'approved_by' => 1,
                 'approved_at' => Carbon::now()->subDays(10),
-                'notes' => 'Regular monthly fuel billing for 15 vehicles'
+                'notes' => 'Regular monthly fuel billing for 15 vehicles',
             ],
             [
                 'vendor_id' => 2, // MasterTech
@@ -37,7 +37,7 @@ class VendorExpenseSeeder extends Seeder
                 'status' => 'approved',
                 'approved_by' => 1,
                 'approved_at' => Carbon::now()->subDays(5),
-                'notes' => 'Emergency repair for Vehicle VH001'
+                'notes' => 'Emergency repair for Vehicle VH001',
             ],
             [
                 'vendor_id' => 3, // Insurance
@@ -51,7 +51,7 @@ class VendorExpenseSeeder extends Seeder
                 'status' => 'paid',
                 'approved_by' => 1,
                 'approved_at' => Carbon::now()->subDays(25),
-                'notes' => 'Q1 2024 insurance premium payment'
+                'notes' => 'Q1 2024 insurance premium payment',
             ],
             [
                 'vendor_id' => 4, // Equipment Rental
@@ -65,7 +65,7 @@ class VendorExpenseSeeder extends Seeder
                 'status' => 'pending',
                 'approved_by' => null,
                 'approved_at' => null,
-                'notes' => 'Weekly forklift rental - warehouse dock operations'
+                'notes' => 'Weekly forklift rental - warehouse dock operations',
             ],
             [
                 'vendor_id' => 5, // Cleaning Services
@@ -79,7 +79,7 @@ class VendorExpenseSeeder extends Seeder
                 'status' => 'approved',
                 'approved_by' => 1,
                 'approved_at' => Carbon::now()->subDays(2),
-                'notes' => 'Regular monthly cleaning services'
+                'notes' => 'Regular monthly cleaning services',
             ],
             [
                 'vendor_id' => 6, // Office Supplies
@@ -93,8 +93,8 @@ class VendorExpenseSeeder extends Seeder
                 'status' => 'paid',
                 'approved_by' => 1,
                 'approved_at' => Carbon::now()->subDays(8),
-                'notes' => 'Monthly office supply order'
-            ]
+                'notes' => 'Monthly office supply order',
+            ],
         ];
 
         foreach ($vendorExpenses as $expense) {

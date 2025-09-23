@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\ProvincialTax;
+use Illuminate\Database\Seeder;
 
 class ProvincialTaxSeeder extends Seeder
 {
@@ -27,7 +27,7 @@ class ProvincialTaxSeeder extends Seeder
             ['province_code' => 'QC', 'province_name' => 'Quebec', 'tax_type' => 'QST', 'tax_rate' => 9.975, 'tax_number' => null],
             ['province_code' => 'SK', 'province_name' => 'Saskatchewan', 'tax_type' => 'GST', 'tax_rate' => 5.00, 'tax_number' => null],
             ['province_code' => 'SK', 'province_name' => 'Saskatchewan', 'tax_type' => 'PST', 'tax_rate' => 6.00, 'tax_number' => null],
-            ['province_code' => 'YT', 'province_name' => 'Yukon', 'tax_type' => 'GST', 'tax_rate' => 5.00, 'tax_number' => null]
+            ['province_code' => 'YT', 'province_name' => 'Yukon', 'tax_type' => 'GST', 'tax_rate' => 5.00, 'tax_number' => null],
         ];
 
         foreach ($provincialTaxes as $tax) {

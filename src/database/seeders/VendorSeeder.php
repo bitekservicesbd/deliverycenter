@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Vendor;
+use Illuminate\Database\Seeder;
 
 class VendorSeeder extends Seeder
 {
@@ -23,7 +23,7 @@ class VendorSeeder extends Seeder
                 'country' => 'Canada',
                 'tax_number' => 'GST-123456789',
                 'vendor_type' => 'fuel',
-                'payment_terms' => json_encode(['net_30', 'fleet_card_available'])
+                'payment_terms' => json_encode(['net_30', 'fleet_card_available']),
             ],
             [
                 'vendor_number' => 'VEN002',
@@ -38,7 +38,7 @@ class VendorSeeder extends Seeder
                 'country' => 'Canada',
                 'tax_number' => 'HST-987654321',
                 'vendor_type' => 'maintenance',
-                'payment_terms' => json_encode(['net_15', 'emergency_service_available'])
+                'payment_terms' => json_encode(['net_15', 'emergency_service_available']),
             ],
             [
                 'vendor_number' => 'VEN003',
@@ -53,7 +53,7 @@ class VendorSeeder extends Seeder
                 'country' => 'Canada',
                 'tax_number' => 'HST-456789123',
                 'vendor_type' => 'insurance',
-                'payment_terms' => json_encode(['annual_payment', 'quarterly_payment_available'])
+                'payment_terms' => json_encode(['annual_payment', 'quarterly_payment_available']),
             ],
             [
                 'vendor_number' => 'VEN004',
@@ -68,7 +68,7 @@ class VendorSeeder extends Seeder
                 'country' => 'Canada',
                 'tax_number' => 'HST-789123456',
                 'vendor_type' => 'equipment',
-                'payment_terms' => json_encode(['net_30', 'weekly_rental_terms'])
+                'payment_terms' => json_encode(['net_30', 'weekly_rental_terms']),
             ],
             [
                 'vendor_number' => 'VEN005',
@@ -83,7 +83,7 @@ class VendorSeeder extends Seeder
                 'country' => 'Canada',
                 'tax_number' => 'HST-321654987',
                 'vendor_type' => 'service',
-                'payment_terms' => json_encode(['net_15', 'monthly_billing'])
+                'payment_terms' => json_encode(['net_15', 'monthly_billing']),
             ],
             [
                 'vendor_number' => 'VEN006',
@@ -98,8 +98,8 @@ class VendorSeeder extends Seeder
                 'country' => 'Canada',
                 'tax_number' => 'HST-654987321',
                 'vendor_type' => 'other',
-                'payment_terms' => json_encode(['net_30', 'volume_discounts_available'])
-            ]
+                'payment_terms' => json_encode(['net_30', 'volume_discounts_available']),
+            ],
         ];
 
         foreach ($vendors as $vendor) {

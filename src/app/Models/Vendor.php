@@ -24,12 +24,12 @@ class Vendor extends Model
         'payment_terms',
         'tax_id',
         'services_provided',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
         'services_provided' => 'array',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     public function expenses()

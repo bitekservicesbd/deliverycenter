@@ -19,7 +19,7 @@ class Weather extends Model
         'end_date',
         'impact_on_deliveries',
         'recommended_actions',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -28,6 +28,6 @@ class Weather extends Model
         'end_date' => 'datetime',
         'impact_on_deliveries' => 'array',
         'recommended_actions' => 'array',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

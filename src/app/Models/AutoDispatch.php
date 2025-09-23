@@ -18,7 +18,7 @@ class AutoDispatch extends Model
         'carrier_selection_method',
         'priority_order',
         'conditions',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -26,6 +26,6 @@ class AutoDispatch extends Model
         'action' => 'array',
         'conditions' => 'array',
         'priority_order' => 'integer',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\UserSecuritySetting;
+use Illuminate\Database\Seeder;
 
 class UserSecuritySettingSeeder extends Seeder
 {
@@ -28,7 +28,7 @@ class UserSecuritySettingSeeder extends Seeder
                 'allow_view_pricing' => true,
                 'allow_importer' => true,
                 'allow_custom_order' => true,
-                'allow_global_address_list' => true
+                'allow_global_address_list' => true,
             ],
             [
                 'user_id' => 2, // Dispatcher user (if exists)
@@ -48,8 +48,8 @@ class UserSecuritySettingSeeder extends Seeder
                 'allow_view_pricing' => false,
                 'allow_importer' => false,
                 'allow_custom_order' => true,
-                'allow_global_address_list' => true
-            ]
+                'allow_global_address_list' => true,
+            ],
         ];
 
         foreach ($userSecuritySettings as $setting) {

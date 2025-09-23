@@ -21,7 +21,7 @@ class Zone extends Model
         'zone_group_id',
         'delivery_days',
         'pickup_days',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -32,7 +32,7 @@ class Zone extends Model
         'coordinates' => 'array',
         'delivery_days' => 'integer',
         'pickup_days' => 'integer',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     public function zoneGroup()

@@ -1,4 +1,5 @@
 <?php
+
 // database/migrations/tenant/2024_01_01_000016_create_fuel_surcharge_plans_table.php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Package;
+use Illuminate\Database\Seeder;
 
 class PackageSeeder extends Seeder
 {
@@ -20,7 +20,7 @@ class PackageSeeder extends Seeder
                 'max_height' => 2.00,
                 'volume_weight_factor' => 5000.00,
                 'base_rate' => 12.50,
-                'package_category' => 'envelope'
+                'package_category' => 'envelope',
             ],
             [
                 'name' => 'Large Envelope',
@@ -32,7 +32,7 @@ class PackageSeeder extends Seeder
                 'max_height' => 3.00,
                 'volume_weight_factor' => 5000.00,
                 'base_rate' => 18.75,
-                'package_category' => 'envelope'
+                'package_category' => 'envelope',
             ],
             [
                 'name' => 'Small Box',
@@ -44,7 +44,7 @@ class PackageSeeder extends Seeder
                 'max_height' => 15.00,
                 'volume_weight_factor' => 5000.00,
                 'base_rate' => 25.00,
-                'package_category' => 'box'
+                'package_category' => 'box',
             ],
             [
                 'name' => 'Medium Box',
@@ -56,7 +56,7 @@ class PackageSeeder extends Seeder
                 'max_height' => 30.00,
                 'volume_weight_factor' => 5000.00,
                 'base_rate' => 45.00,
-                'package_category' => 'box'
+                'package_category' => 'box',
             ],
             [
                 'name' => 'Large Box',
@@ -68,7 +68,7 @@ class PackageSeeder extends Seeder
                 'max_height' => 50.00,
                 'volume_weight_factor' => 5000.00,
                 'base_rate' => 85.00,
-                'package_category' => 'box'
+                'package_category' => 'box',
             ],
             [
                 'name' => 'Standard Pallet',
@@ -80,7 +80,7 @@ class PackageSeeder extends Seeder
                 'max_height' => 180.00,
                 'volume_weight_factor' => 300.00,
                 'base_rate' => 175.00,
-                'package_category' => 'pallet'
+                'package_category' => 'pallet',
             ],
             [
                 'name' => 'Oversized Item',
@@ -92,7 +92,7 @@ class PackageSeeder extends Seeder
                 'max_height' => 200.00,
                 'volume_weight_factor' => 200.00,
                 'base_rate' => 350.00,
-                'package_category' => 'oversized'
+                'package_category' => 'oversized',
             ],
             [
                 'name' => 'Document Tube',
@@ -104,8 +104,8 @@ class PackageSeeder extends Seeder
                 'max_height' => 15.00,
                 'volume_weight_factor' => 5000.00,
                 'base_rate' => 22.50,
-                'package_category' => 'tube'
-            ]
+                'package_category' => 'tube',
+            ],
         ];
 
         foreach ($packages as $package) {

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\CarrierAccount;
+use Illuminate\Database\Seeder;
 
 class CarrierAccountSeeder extends Seeder
 {
@@ -22,7 +22,7 @@ class CarrierAccountSeeder extends Seeder
                     'city' => 'Mississauga',
                     'province' => 'ON',
                     'postal_code' => 'L5R 3V8',
-                    'country' => 'Canada'
+                    'country' => 'Canada',
                 ]),
                 'service_types' => json_encode(['express', 'ground', 'freight', 'international']),
                 'rate_discount' => 15.50,
@@ -33,8 +33,8 @@ class CarrierAccountSeeder extends Seeder
                     'api_key' => 'fedex_api_key_placeholder',
                     'password' => 'fedex_password_placeholder',
                     'account_number' => 'FDX-123456789',
-                    'meter_number' => 'FDX-METER-001'
-                ])
+                    'meter_number' => 'FDX-METER-001',
+                ]),
             ],
             [
                 'carrier_name' => 'UPS Canada',
@@ -48,7 +48,7 @@ class CarrierAccountSeeder extends Seeder
                     'city' => 'Mississauga',
                     'province' => 'ON',
                     'postal_code' => 'L5N 8E7',
-                    'country' => 'Canada'
+                    'country' => 'Canada',
                 ]),
                 'service_types' => json_encode(['next_day', 'ground', 'freight', 'logistics']),
                 'rate_discount' => 12.75,
@@ -59,8 +59,8 @@ class CarrierAccountSeeder extends Seeder
                     'api_key' => 'ups_api_key_placeholder',
                     'username' => 'ups_username_placeholder',
                     'password' => 'ups_password_placeholder',
-                    'account_number' => 'UPS-987654321'
-                ])
+                    'account_number' => 'UPS-987654321',
+                ]),
             ],
             [
                 'carrier_name' => 'Canada Post',
@@ -74,7 +74,7 @@ class CarrierAccountSeeder extends Seeder
                     'city' => 'Ottawa',
                     'province' => 'ON',
                     'postal_code' => 'K1A 0B1',
-                    'country' => 'Canada'
+                    'country' => 'Canada',
                 ]),
                 'service_types' => json_encode(['priority', 'regular_parcel', 'expedited', 'xpresspost']),
                 'rate_discount' => 8.25,
@@ -85,8 +85,8 @@ class CarrierAccountSeeder extends Seeder
                     'customer_number' => 'CP-456789123',
                     'contract_number' => 'CP-CONTRACT-001',
                     'username' => 'cp_api_username',
-                    'password' => 'cp_api_password'
-                ])
+                    'password' => 'cp_api_password',
+                ]),
             ],
             [
                 'carrier_name' => 'Purolator',
@@ -100,7 +100,7 @@ class CarrierAccountSeeder extends Seeder
                     'city' => 'Mississauga',
                     'province' => 'ON',
                     'postal_code' => 'L5R 3T8',
-                    'country' => 'Canada'
+                    'country' => 'Canada',
                 ]),
                 'service_types' => json_encode(['express', 'ground', 'freight', 'logistics']),
                 'rate_discount' => 10.50,
@@ -111,9 +111,9 @@ class CarrierAccountSeeder extends Seeder
                     'api_key' => 'purolator_api_key_placeholder',
                     'key_token' => 'purolator_token_placeholder',
                     'account_number' => 'PUR-789123456',
-                    'billing_account' => 'PUR-BILL-001'
-                ])
-            ]
+                    'billing_account' => 'PUR-BILL-001',
+                ]),
+            ],
         ];
 
         foreach ($carrierAccounts as $account) {

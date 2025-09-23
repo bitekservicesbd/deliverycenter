@@ -20,7 +20,7 @@ class Surcharge extends Model
         'applies_to',
         'conditions',
         'gl_code',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -29,6 +29,6 @@ class Surcharge extends Model
         'maximum_charge' => 'decimal:2',
         'applies_to' => 'array',
         'conditions' => 'array',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

@@ -20,7 +20,7 @@ class Package extends Model
         'volume',
         'package_type',
         'handling_requirements',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -30,6 +30,6 @@ class Package extends Model
         'weight' => 'decimal:2',
         'volume' => 'decimal:2',
         'handling_requirements' => 'array',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

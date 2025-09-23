@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Dock;
+use Illuminate\Database\Seeder;
 
 class DockSeeder extends Seeder
 {
@@ -25,10 +25,10 @@ class DockSeeder extends Seeder
                     'thursday' => ['start' => '06:00', 'end' => '18:00'],
                     'friday' => ['start' => '06:00', 'end' => '18:00'],
                     'saturday' => ['start' => '08:00', 'end' => '16:00'],
-                    'sunday' => ['start' => null, 'end' => null]
+                    'sunday' => ['start' => null, 'end' => null],
                 ]),
                 'height_clearance' => 4.50,
-                'width_clearance' => 3.00
+                'width_clearance' => 3.00,
             ],
             [
                 'dock_number' => 'DOCK-002',
@@ -45,10 +45,10 @@ class DockSeeder extends Seeder
                     'thursday' => ['start' => '05:00', 'end' => '20:00'],
                     'friday' => ['start' => '05:00', 'end' => '20:00'],
                     'saturday' => ['start' => '07:00', 'end' => '19:00'],
-                    'sunday' => ['start' => '09:00', 'end' => '17:00']
+                    'sunday' => ['start' => '09:00', 'end' => '17:00'],
                 ]),
                 'height_clearance' => 5.00,
-                'width_clearance' => 3.50
+                'width_clearance' => 3.50,
             ],
             [
                 'dock_number' => 'DOCK-003',
@@ -65,11 +65,11 @@ class DockSeeder extends Seeder
                     'thursday' => ['start' => '24/7', 'end' => '24/7'],
                     'friday' => ['start' => '24/7', 'end' => '24/7'],
                     'saturday' => ['start' => '24/7', 'end' => '24/7'],
-                    'sunday' => ['start' => '24/7', 'end' => '24/7']
+                    'sunday' => ['start' => '24/7', 'end' => '24/7'],
                 ]),
                 'height_clearance' => 3.00,
-                'width_clearance' => 2.50
-            ]
+                'width_clearance' => 2.50,
+            ],
         ];
 
         foreach ($docks as $dock) {

@@ -28,12 +28,12 @@ class Company extends Model
         'currency_id',
         'timezone',
         'is_default',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
         'is_default' => 'boolean',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     public function currency()

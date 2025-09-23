@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\BillingGroup;
+use Illuminate\Database\Seeder;
 
 class BillingGroupSeeder extends Seeder
 {
@@ -18,7 +18,7 @@ class BillingGroupSeeder extends Seeder
                 'auto_generate_invoices' => true,
                 'consolidate_orders' => true,
                 'discount_percentage' => 15.00,
-                'credit_limit' => 50000.00
+                'credit_limit' => 50000.00,
             ],
             [
                 'name' => 'Small Business',
@@ -28,7 +28,7 @@ class BillingGroupSeeder extends Seeder
                 'auto_generate_invoices' => true,
                 'consolidate_orders' => true,
                 'discount_percentage' => 8.00,
-                'credit_limit' => 10000.00
+                'credit_limit' => 10000.00,
             ],
             [
                 'name' => 'Retail Customers',
@@ -38,7 +38,7 @@ class BillingGroupSeeder extends Seeder
                 'auto_generate_invoices' => false,
                 'consolidate_orders' => false,
                 'discount_percentage' => 0.00,
-                'credit_limit' => 1000.00
+                'credit_limit' => 1000.00,
             ],
             [
                 'name' => 'Premium Partners',
@@ -48,7 +48,7 @@ class BillingGroupSeeder extends Seeder
                 'auto_generate_invoices' => true,
                 'consolidate_orders' => true,
                 'discount_percentage' => 25.00,
-                'credit_limit' => 100000.00
+                'credit_limit' => 100000.00,
             ],
             [
                 'name' => 'Government Accounts',
@@ -58,8 +58,8 @@ class BillingGroupSeeder extends Seeder
                 'auto_generate_invoices' => true,
                 'consolidate_orders' => true,
                 'discount_percentage' => 5.00,
-                'credit_limit' => 75000.00
-            ]
+                'credit_limit' => 75000.00,
+            ],
         ];
 
         foreach ($billingGroups as $group) {

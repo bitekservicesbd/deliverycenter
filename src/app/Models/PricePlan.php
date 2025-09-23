@@ -23,7 +23,7 @@ class PricePlan extends Model
         'fuel_surcharge_plan_id',
         'effective_date',
         'expiry_date',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -35,7 +35,7 @@ class PricePlan extends Model
         'minimum_charge' => 'decimal:2',
         'effective_date' => 'date',
         'expiry_date' => 'date',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     public function fuelSurchargePlan()

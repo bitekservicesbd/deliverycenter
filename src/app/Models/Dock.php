@@ -19,7 +19,7 @@ class Dock extends Model
         'equipment_available',
         'restrictions',
         'contact_info',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -27,7 +27,7 @@ class Dock extends Model
         'equipment_available' => 'array',
         'restrictions' => 'array',
         'contact_info' => 'array',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     public function warehouse()
@@ -35,4 +35,3 @@ class Dock extends Model
         return $this->belongsTo(Warehouse::class);
     }
 }
-

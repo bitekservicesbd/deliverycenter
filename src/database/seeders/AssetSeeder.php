@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Asset;
+use Illuminate\Database\Seeder;
 
 class AssetSeeder extends Seeder
 {
@@ -25,7 +25,7 @@ class AssetSeeder extends Seeder
                 'capacity_volume' => 15.50,
                 'has_tailgate' => true,
                 'temperature_controlled' => false,
-                'assigned_carrier_id' => null
+                'assigned_carrier_id' => null,
             ],
             [
                 'asset_number' => 'VH002',
@@ -42,7 +42,7 @@ class AssetSeeder extends Seeder
                 'capacity_volume' => 20.00,
                 'has_tailgate' => true,
                 'temperature_controlled' => true,
-                'assigned_carrier_id' => null
+                'assigned_carrier_id' => null,
             ],
             [
                 'asset_number' => 'TR001',
@@ -59,7 +59,7 @@ class AssetSeeder extends Seeder
                 'capacity_volume' => 75.00,
                 'has_tailgate' => false,
                 'temperature_controlled' => false,
-                'assigned_carrier_id' => null
+                'assigned_carrier_id' => null,
             ],
             [
                 'asset_number' => 'EQ001',
@@ -76,8 +76,8 @@ class AssetSeeder extends Seeder
                 'capacity_volume' => null,
                 'has_tailgate' => false,
                 'temperature_controlled' => false,
-                'assigned_carrier_id' => null
-            ]
+                'assigned_carrier_id' => null,
+            ],
         ];
 
         foreach ($assets as $asset) {

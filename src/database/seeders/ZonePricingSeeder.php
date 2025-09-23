@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\ZonePricing;
+use Illuminate\Database\Seeder;
 
 class ZonePricingSeeder extends Seeder
 {
@@ -20,7 +20,7 @@ class ZonePricingSeeder extends Seeder
                 'minimum_charge' => 12.00,
                 'maximum_charge' => 500.00,
                 'fuel_surcharge_rate' => 12.5,
-                'effective_date' => '2024-01-01'
+                'effective_date' => '2024-01-01',
             ],
             [
                 'from_zone_id' => 1, // GTA Core
@@ -32,7 +32,7 @@ class ZonePricingSeeder extends Seeder
                 'minimum_charge' => 18.00,
                 'maximum_charge' => 750.00,
                 'fuel_surcharge_rate' => 15.0,
-                'effective_date' => '2024-01-01'
+                'effective_date' => '2024-01-01',
             ],
             [
                 'from_zone_id' => 1, // GTA Core
@@ -44,7 +44,7 @@ class ZonePricingSeeder extends Seeder
                 'minimum_charge' => 28.00,
                 'maximum_charge' => 1200.00,
                 'fuel_surcharge_rate' => 18.5,
-                'effective_date' => '2024-01-01'
+                'effective_date' => '2024-01-01',
             ],
             [
                 'from_zone_id' => 1, // GTA Core
@@ -56,7 +56,7 @@ class ZonePricingSeeder extends Seeder
                 'minimum_charge' => 35.00,
                 'maximum_charge' => 1500.00,
                 'fuel_surcharge_rate' => 20.0,
-                'effective_date' => '2024-01-01'
+                'effective_date' => '2024-01-01',
             ],
             [
                 'from_zone_id' => 1, // GTA Core
@@ -68,7 +68,7 @@ class ZonePricingSeeder extends Seeder
                 'minimum_charge' => 65.00,
                 'maximum_charge' => 3000.00,
                 'fuel_surcharge_rate' => 25.0,
-                'effective_date' => '2024-01-01'
+                'effective_date' => '2024-01-01',
             ],
             [
                 'from_zone_id' => 1, // GTA Core
@@ -80,7 +80,7 @@ class ZonePricingSeeder extends Seeder
                 'minimum_charge' => 25.00,
                 'maximum_charge' => 800.00,
                 'fuel_surcharge_rate' => 15.0,
-                'effective_date' => '2024-01-01'
+                'effective_date' => '2024-01-01',
             ],
             [
                 'from_zone_id' => 2, // GTA Extended
@@ -92,7 +92,7 @@ class ZonePricingSeeder extends Seeder
                 'minimum_charge' => 15.00,
                 'maximum_charge' => 600.00,
                 'fuel_surcharge_rate' => 14.0,
-                'effective_date' => '2024-01-01'
+                'effective_date' => '2024-01-01',
             ],
             [
                 'from_zone_id' => 7, // Remote Areas
@@ -104,8 +104,8 @@ class ZonePricingSeeder extends Seeder
                 'minimum_charge' => 95.00,
                 'maximum_charge' => 5000.00,
                 'fuel_surcharge_rate' => 35.0,
-                'effective_date' => '2024-01-01'
-            ]
+                'effective_date' => '2024-01-01',
+            ],
         ];
 
         foreach ($zonePricing as $pricing) {

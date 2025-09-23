@@ -28,7 +28,7 @@ class Carrier extends Model
         'payment_terms',
         'commission_rate',
         'fuel_surcharge_rate',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -36,7 +36,7 @@ class Carrier extends Model
         'service_areas' => 'array',
         'commission_rate' => 'decimal:2',
         'fuel_surcharge_rate' => 'decimal:2',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     public function assets()

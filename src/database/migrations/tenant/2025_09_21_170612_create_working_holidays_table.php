@@ -1,4 +1,5 @@
 <?php
+
 // database/migrations/tenant/2024_01_01_000031_create_working_holidays_table.php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

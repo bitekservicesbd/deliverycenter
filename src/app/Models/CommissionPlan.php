@@ -19,7 +19,7 @@ class CommissionPlan extends Model
         'minimum_amount',
         'maximum_amount',
         'effective_date',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -28,6 +28,6 @@ class CommissionPlan extends Model
         'minimum_amount' => 'decimal:2',
         'maximum_amount' => 'decimal:2',
         'effective_date' => 'date',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

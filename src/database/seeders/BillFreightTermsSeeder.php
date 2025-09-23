@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\BillFreightTerm;
+use Illuminate\Database\Seeder;
 
 class BillFreightTermSeeder extends Seeder
 {
@@ -17,7 +17,7 @@ class BillFreightTermSeeder extends Seeder
             ['code' => 'FB', 'description' => 'Freight Bill', 'payment_responsibility' => 'shipper', 'collect_on_delivery' => false],
             ['code' => 'NET30', 'description' => 'Net 30 Days', 'payment_responsibility' => 'shipper', 'collect_on_delivery' => false],
             ['code' => 'NET15', 'description' => 'Net 15 Days', 'payment_responsibility' => 'shipper', 'collect_on_delivery' => false],
-            ['code' => 'IMM', 'description' => 'Immediate Payment', 'payment_responsibility' => 'shipper', 'collect_on_delivery' => false]
+            ['code' => 'IMM', 'description' => 'Immediate Payment', 'payment_responsibility' => 'shipper', 'collect_on_delivery' => false],
         ];
 
         foreach ($terms as $term) {

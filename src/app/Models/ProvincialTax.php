@@ -17,7 +17,7 @@ class ProvincialTax extends Model
         'effective_date',
         'expiry_date',
         'applies_to',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -25,6 +25,6 @@ class ProvincialTax extends Model
         'effective_date' => 'date',
         'expiry_date' => 'date',
         'applies_to' => 'array',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

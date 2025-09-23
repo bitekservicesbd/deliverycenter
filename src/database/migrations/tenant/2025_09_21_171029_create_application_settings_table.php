@@ -1,4 +1,5 @@
 <?php
+
 // database/migrations/tenant/2024_01_01_000039_create_application_settings_table.php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,7 +19,7 @@ return new class extends Migration
             $table->boolean('is_system')->default(false); // system vs user configurable
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            
+
             $table->unique(['setting_key']);
             $table->index(['setting_group']);
             $table->index(['is_active']);

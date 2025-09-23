@@ -16,13 +16,13 @@ class PricePlanTemplate extends Model
         'template_type',
         'default_values',
         'validation_rules',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
         'template_data' => 'array',
         'default_values' => 'array',
         'validation_rules' => 'array',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

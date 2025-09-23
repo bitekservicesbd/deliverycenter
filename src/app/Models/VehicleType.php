@@ -23,7 +23,7 @@ class VehicleType extends Model
         'has_lift_gate',
         'temperature_controlled',
         'hazmat_capable',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -36,6 +36,6 @@ class VehicleType extends Model
         'has_lift_gate' => 'boolean',
         'temperature_controlled' => 'boolean',
         'hazmat_capable' => 'boolean',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

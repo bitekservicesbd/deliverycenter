@@ -19,7 +19,7 @@ class DispatchBoard extends Model
         'sort_order',
         'columns_visible',
         'is_default',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -28,6 +28,6 @@ class DispatchBoard extends Model
         'refresh_interval' => 'integer',
         'columns_visible' => 'array',
         'is_default' => 'boolean',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

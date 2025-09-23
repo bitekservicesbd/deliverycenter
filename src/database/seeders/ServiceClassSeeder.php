@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\ServiceClass;
+use Illuminate\Database\Seeder;
 
 class ServiceClassSeeder extends Seeder
 {
@@ -21,7 +21,7 @@ class ServiceClassSeeder extends Seeder
                 'weekend_service' => false,
                 'tracking_included' => true,
                 'insurance_included' => true,
-                'signature_required' => true
+                'signature_required' => true,
             ],
             [
                 'name' => 'Express',
@@ -34,7 +34,7 @@ class ServiceClassSeeder extends Seeder
                 'weekend_service' => false,
                 'tracking_included' => true,
                 'insurance_included' => true,
-                'signature_required' => true
+                'signature_required' => true,
             ],
             [
                 'name' => 'Priority',
@@ -47,7 +47,7 @@ class ServiceClassSeeder extends Seeder
                 'weekend_service' => false,
                 'tracking_included' => true,
                 'insurance_included' => false,
-                'signature_required' => false
+                'signature_required' => false,
             ],
             [
                 'name' => 'Standard',
@@ -60,7 +60,7 @@ class ServiceClassSeeder extends Seeder
                 'weekend_service' => false,
                 'tracking_included' => true,
                 'insurance_included' => false,
-                'signature_required' => false
+                'signature_required' => false,
             ],
             [
                 'name' => 'Economy',
@@ -73,7 +73,7 @@ class ServiceClassSeeder extends Seeder
                 'weekend_service' => false,
                 'tracking_included' => false,
                 'insurance_included' => false,
-                'signature_required' => false
+                'signature_required' => false,
             ],
             [
                 'name' => 'Rush',
@@ -86,8 +86,8 @@ class ServiceClassSeeder extends Seeder
                 'weekend_service' => true,
                 'tracking_included' => true,
                 'insurance_included' => true,
-                'signature_required' => true
-            ]
+                'signature_required' => true,
+            ],
         ];
 
         foreach ($serviceClasses as $serviceClass) {

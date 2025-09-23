@@ -18,13 +18,13 @@ class SalesCommissionPlan extends Model
         'tier_structure',
         'target_criteria',
         'payment_frequency',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
         'base_rate' => 'decimal:2',
         'tier_structure' => 'array',
         'target_criteria' => 'array',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

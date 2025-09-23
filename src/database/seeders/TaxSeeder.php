@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Tax;
+use Illuminate\Database\Seeder;
 
 class TaxSeeder extends Seeder
 {
@@ -19,7 +19,7 @@ class TaxSeeder extends Seeder
                 'province_code' => 'ON',
                 'is_compound' => false,
                 'tax_number' => 'RT0001',
-                'effective_date' => '2024-01-01'
+                'effective_date' => '2024-01-01',
             ],
             [
                 'tax_name' => 'GST Federal',
@@ -30,7 +30,7 @@ class TaxSeeder extends Seeder
                 'province_code' => 'AB',
                 'is_compound' => false,
                 'tax_number' => 'RT0001',
-                'effective_date' => '2024-01-01'
+                'effective_date' => '2024-01-01',
             ],
             [
                 'tax_name' => 'PST British Columbia',
@@ -41,7 +41,7 @@ class TaxSeeder extends Seeder
                 'province_code' => 'BC',
                 'is_compound' => false,
                 'tax_number' => 'PST-12345',
-                'effective_date' => '2024-01-01'
+                'effective_date' => '2024-01-01',
             ],
             [
                 'tax_name' => 'QST Quebec',
@@ -52,7 +52,7 @@ class TaxSeeder extends Seeder
                 'province_code' => 'QC',
                 'is_compound' => true,
                 'tax_number' => 'QST-67890',
-                'effective_date' => '2024-01-01'
+                'effective_date' => '2024-01-01',
             ],
             [
                 'tax_name' => 'HST Nova Scotia',
@@ -63,8 +63,8 @@ class TaxSeeder extends Seeder
                 'province_code' => 'NS',
                 'is_compound' => false,
                 'tax_number' => 'RT0001',
-                'effective_date' => '2024-01-01'
-            ]
+                'effective_date' => '2024-01-01',
+            ],
         ];
 
         foreach ($taxes as $tax) {

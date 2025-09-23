@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\CurrencyType;
+use Illuminate\Database\Seeder;
 
 class CurrencyTypeSeeder extends Seeder
 {
@@ -14,7 +14,7 @@ class CurrencyTypeSeeder extends Seeder
             ['name' => 'US Dollar', 'code' => 'USD', 'symbol' => '$', 'exchange_rate' => 0.740000, 'is_default' => false],
             ['name' => 'Euro', 'code' => 'EUR', 'symbol' => '€', 'exchange_rate' => 0.620000, 'is_default' => false],
             ['name' => 'British Pound', 'code' => 'GBP', 'symbol' => '£', 'exchange_rate' => 0.550000, 'is_default' => false],
-            ['name' => 'Mexican Peso', 'code' => 'MXN', 'symbol' => '$', 'exchange_rate' => 14.500000, 'is_default' => false]
+            ['name' => 'Mexican Peso', 'code' => 'MXN', 'symbol' => '$', 'exchange_rate' => 14.500000, 'is_default' => false],
         ];
 
         foreach ($currencies as $currency) {

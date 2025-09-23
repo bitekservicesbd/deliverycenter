@@ -19,12 +19,12 @@ class CarrierAccount extends Model
         'notes',
         'account_type',
         'account_details',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
         'account_details' => 'array',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     public function carrier()

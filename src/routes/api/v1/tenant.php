@@ -26,7 +26,6 @@ use App\Http\Controllers\Api\V1\Tenant\Settings\ServiceClassController;
 use App\Http\Controllers\Api\V1\Tenant\Settings\SurchargeController;
 use App\Http\Controllers\Api\V1\Tenant\Settings\TaxController;
 use App\Http\Controllers\Api\V1\Tenant\Settings\UomTypeController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\UserController;
 use App\Http\Controllers\Api\V1\Tenant\Settings\VehicleTypeController;
 use App\Http\Controllers\Api\V1\Tenant\Settings\VendorController;
 use App\Http\Controllers\Api\V1\Tenant\Settings\VendorExpenseController;

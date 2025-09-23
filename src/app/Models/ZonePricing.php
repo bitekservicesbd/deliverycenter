@@ -20,7 +20,7 @@ class ZonePricing extends Model
         'fuel_surcharge_applicable',
         'effective_date',
         'expiry_date',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -30,7 +30,7 @@ class ZonePricing extends Model
         'fuel_surcharge_applicable' => 'boolean',
         'effective_date' => 'date',
         'expiry_date' => 'date',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     public function originZone()

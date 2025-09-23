@@ -17,7 +17,7 @@ class BillFreightTerm extends Model
         'discount_days',
         'description',
         'is_default',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -25,6 +25,6 @@ class BillFreightTerm extends Model
         'discount_percentage' => 'decimal:2',
         'discount_days' => 'integer',
         'is_default' => 'boolean',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

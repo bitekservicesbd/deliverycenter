@@ -28,13 +28,13 @@ class Customer extends Model
         'tax_exempt',
         'tax_id',
         'customer_type',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
         'credit_limit' => 'decimal:2',
         'tax_exempt' => 'boolean',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     public function paymentTerms()

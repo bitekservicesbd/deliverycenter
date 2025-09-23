@@ -20,7 +20,7 @@ class Tax extends Model
         'effective_date',
         'expiry_date',
         'is_compound',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -29,6 +29,6 @@ class Tax extends Model
         'effective_date' => 'date',
         'expiry_date' => 'date',
         'is_compound' => 'boolean',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

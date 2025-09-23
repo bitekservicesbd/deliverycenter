@@ -25,7 +25,7 @@ class Warehouse extends Model
         'capacity',
         'services_available',
         'restrictions',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -33,7 +33,7 @@ class Warehouse extends Model
         'dock_count' => 'integer',
         'services_available' => 'array',
         'restrictions' => 'array',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     public function docks()

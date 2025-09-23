@@ -1,4 +1,5 @@
 <?php
+
 // database/migrations/tenant/2024_01_01_000020_create_provincial_taxes_table.php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

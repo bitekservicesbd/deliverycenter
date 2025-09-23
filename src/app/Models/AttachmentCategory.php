@@ -15,13 +15,13 @@ class AttachmentCategory extends Model
         'allowed_extensions',
         'max_file_size',
         'is_required',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
         'allowed_extensions' => 'array',
         'max_file_size' => 'integer',
         'is_required' => 'boolean',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }
