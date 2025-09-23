@@ -24,7 +24,7 @@ class AuthController extends Controller
         $user = User::where('email', $validated['email'])->first();
 
         if (! $user || ! Hash::check($validated['password'], $user->password)) {
-            return errorResponse('Invalid credentials', 401);
+            return errorResponse('Unauthorized', 401);
         }
 
         if ($user->status != 'active') {
