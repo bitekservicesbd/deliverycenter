@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('password');
             $table->text('google2fa_secret')->nullable();
             $table->rememberToken();
+            $table->date('last_login_at')->nullable();
             $table->timestamps();
         });
 

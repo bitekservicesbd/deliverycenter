@@ -5,36 +5,8 @@ use App\Http\Controllers\Api\V1\Tenant\AuthController;
 use App\Http\Controllers\Api\V1\Tenant\Settings\AccessorialTypeController;
 use App\Http\Controllers\Api\V1\Tenant\Settings\AssetController;
 use App\Http\Controllers\Api\V1\Tenant\Settings\AttachmentCategoryController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\BillFreightTermController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\BillingGroupController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\CarrierController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\CommissionPlanController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\CompanyController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\CurrencyTypeController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\CustomerController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\DeductionTypeController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\DispatchBoardController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\DockController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\EdiApiSettingController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\FuelSurchargePlanController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\PackageController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\PricePlanController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\PricePlanTemplateController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\ProvincialTaxController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\SalesCommissionPlanController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\ServiceClassController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\SurchargeController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\TaxController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\UomTypeController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\UserController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\VehicleTypeController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\VendorController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\VendorExpenseController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\WarehouseController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\WeatherController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\WorkingHolidayController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\ZoneController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\ZoneGroupController;
+use App\Http\Controllers\Api\V1\Tenant\Settings\AutoDispatchController;
+use App\Http\Controllers\Api\V1\Tenant\Settings\BillingTermController;
 use App\Http\Controllers\Api\V1\Tenant\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -63,7 +35,7 @@ Route::prefix('auth')->name('auth.')->middleware(['cookie_set'])->group(function
 | Protected Tenant Routes
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth:sanctum', 'tenant.auth', 'throttle:api'])->group(function () {
+Route::middleware(['cookie_set'])->group(function () {
 
     // Test Routes
     Route::get('/test', [TestController::class, 'index'])->name('test');
@@ -72,9 +44,64 @@ Route::middleware(['auth:sanctum', 'tenant.auth', 'throttle:api'])->group(functi
 
     /*
     |--------------------------------------------------------------------------
-    | Application Settings Routes
+    | Agent Route
     |--------------------------------------------------------------------------
     */
     Route::prefix('agent')->name('agent.')->group(function () {
+        // Application Settings Routes
+        Route::prefix('settings')->name('settings.')->group(function () {
+
+            // Accessorial Types Routes
+            Route::prefix('accessorial-types')->name('accessorial-types.')->group(function () {
+                Route::get('/', [AccessorialTypeController::class, 'index'])->name('index');
+                Route::post('/', [AccessorialTypeController::class, 'store'])->name('store');
+                Route::get('/options', [AccessorialTypeController::class, 'options'])->name('options');
+                Route::get('/fuel', [AccessorialTypeController::class, 'fuel'])->name('fuel');
+                Route::get('/new-load', [AccessorialTypeController::class, 'newLoad'])->name('new-load');
+                Route::get('/{accessorialType}', [AccessorialTypeController::class, 'show'])->name('show');
+                Route::put('/{accessorialType}', [AccessorialTypeController::class, 'update'])->name('update');
+                Route::delete('/{accessorialType}', [AccessorialTypeController::class, 'destroy'])->name('destroy');
+                Route::patch('/{accessorialType}/restore', [AccessorialTypeController::class, 'restore'])->name('restore');
+            });
+
+            // Attachment Categories Routes
+            Route::prefix('attachment-categories')->name('attachment-categories.')->group(function () {
+                Route::get('/', [AttachmentCategoryController::class, 'index'])->name('index');
+                Route::post('/', [AttachmentCategoryController::class, 'store'])->name('store');
+                Route::get('/options', [AttachmentCategoryController::class, 'options'])->name('options');
+                Route::get('/required', [AttachmentCategoryController::class, 'required'])->name('required');
+                Route::get('/{attachmentCategory}', [AttachmentCategoryController::class, 'show'])->name('show');
+                Route::put('/{attachmentCategory}', [AttachmentCategoryController::class, 'update'])->name('update');
+                Route::delete('/{attachmentCategory}', [AttachmentCategoryController::class, 'destroy'])->name('destroy');
+                Route::patch('/{attachmentCategory}/restore', [AttachmentCategoryController::class, 'restore'])->name('restore');
+            });
+
+            // Assets Routes
+            Route::prefix('assets')->name('assets.')->group(function () {
+                Route::get('/', [AssetController::class, 'index'])->name('index');
+                Route::post('/', [AssetController::class, 'store'])->name('store');
+                Route::get('/options', [AssetController::class, 'options'])->name('options');
+                Route::get('/service-required', [AssetController::class, 'serviceRequired'])->name('service-required');
+                Route::get('/expired-plates', [AssetController::class, 'expiredPlates'])->name('expired-plates');
+                Route::get('/{asset}', [AssetController::class, 'show'])->name('show');
+                Route::put('/{asset}', [AssetController::class, 'update'])->name('update');
+                Route::delete('/{asset}', [AssetController::class, 'destroy'])->name('destroy');
+                Route::patch('/{asset}/restore', [AssetController::class, 'restore'])->name('restore');
+            });
+
+            // Billing Terms Routes
+            Route::prefix('billing-terms')->name('billing-terms.')->group(function () {
+                Route::get('/', [BillingTermController::class, 'index'])->name('index');
+                Route::post('/', [BillingTermController::class, 'store'])->name('store');
+                Route::get('/options', [BillingTermController::class, 'options'])->name('options');
+                Route::get('/default', [BillingTermController::class, 'default'])->name('default');
+                Route::get('/{billingTerm}', [BillingTermController::class, 'show'])->name('show');
+                Route::put('/{billingTerm}', [BillingTermController::class, 'update'])->name('update');
+                Route::delete('/{billingTerm}', [BillingTermController::class, 'destroy'])->name('destroy');
+                Route::patch('/{billingTerm}/restore', [BillingTermController::class, 'restore'])->name('restore');
+                Route::patch('/{billingTerm}/set-default', [BillingTermController::class, 'setDefault'])->name('set-default');
+                Route::post('/{billingTerm}/calculate-discount', [BillingTermController::class, 'calculateDiscount'])->name('calculate-discount');
+            });
+        });
     });
 });
