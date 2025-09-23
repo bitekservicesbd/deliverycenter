@@ -21,6 +21,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'status' => $this->status,
             'role' => $this->role,
+            'avatar' => fake()->imageUrl(400, 400, 'people', true, $this->name),
             'central_activation' => $this->central_activation,
             'email_verified' => $this->email_verified_at ? true : false,
         ];
