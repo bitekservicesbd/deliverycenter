@@ -39,17 +39,17 @@ class AuthController extends Controller
         // * check if app is in local or not. if in not local that means apps is in production and then set secure to true
         // $secure = config('app.env') !== 'local';
 
-        // $cookie = cookie(
-        //     'auth_token',
-        //     $token,
-        //     (60 * 24) * 7, // 7 days
-        //     '/',         // path
-        //     null,        // domain (null = current domain)
-        //     true,        // secure (HTTPS only)
-        //     true,        // httpOnly
-        //     false,       // raw
-        //     'Strict'     // sameSite
-        // );
+        $cookie = cookie(
+            'auth_token',
+            $token,
+            (60 * 24) * 7, // 7 days
+            '/',         // path
+            null,        // domain (null = current domain)
+            true,        // secure (HTTPS only)
+            true,        // httpOnly
+            false,       // raw
+            'Strict'     // sameSite
+        );
 
         // Update last login
         $user->update(['last_login_at' => now()]);
@@ -59,7 +59,7 @@ class AuthController extends Controller
             'user' => $user->toResource(),
             'tenant' => tenant('id'),
             'abilities' => $abilities,
-        ], 'Login successful');
+        ], 'Login successful')->withCookie($cookie);
     }
 
     /**
