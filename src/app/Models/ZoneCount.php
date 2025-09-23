@@ -11,10 +11,10 @@ class ZoneCount extends Model
     protected $fillable = [
         'zone_id',
         'count_date',
-        'delivery_count',
-        'pickup_count',
-        'total_packages',
-        'total_weight',
+        'total_loads',
+        'completed_loads',
+        'pending_loads',
+        'total_revenue',
         'total_revenue',
         'avg_delivery_time',
         'success_rate'

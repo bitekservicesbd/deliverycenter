@@ -12,20 +12,38 @@ class AutoDispatch extends Model
     protected $table = 'auto_dispatch';
 
     protected $fillable = [
-        'rule_name',
-        'criteria',
-        'action',
-        'carrier_selection_method',
-        'priority_order',
-        'conditions',
-        'is_active'
+        'dispatch_to_carrier',
+        'effective_date',
+        'account',
+        'service',
+        'pickup_zone',
+        'pickup_dispatch_zone',
+        'delivery_zone',
+        'delivery_dispatch_zone',
+        'start_date',
+        'end_date',
+        'dispatch_on_days',
+        'alert_min_before_ready',
+        'enable'
     ];
 
     protected $casts = [
-        'criteria' => 'array',
-        'action' => 'array',
-        'conditions' => 'array',
-        'priority_order' => 'integer',
-        'is_active' => 'boolean'
+        'effective_date' => 'date',
+        'start_date' => 'date',
+        'end_date' => 'date',
+        'account' => 'array',
+        'service' => 'array',
+        'pickup_zone' => 'array',
+        'pickup_dispatch_zone' => 'array',
+        'delivery_zone' => 'array',
+        'delivery_dispatch_zone' => 'array',
+        'dispatch_on_days' => 'array',
+        'enable' => 'boolean'
     ];
+
+    // Relationships
+    public function carrier()
+    {
+        return $this->belongsTo(Carrier::class, 'dispatch_to_carrier');
+    }
 }

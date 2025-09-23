@@ -10,13 +10,14 @@ return new class extends Migration
     {
         Schema::create('attachment_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('code')->unique();
-            $table->text('description')->nullable();
-            $table->json('allowed_file_types')->nullable(); // pdf, jpg, png, etc.
-            $table->integer('max_file_size')->nullable(); // in KB
-            $table->boolean('is_required')->default(false);
-            $table->boolean('is_active')->default(true);
+            $table->text('description')->required();
+            $table->string('notify_email')->nullable();
+            $table->string('retention_days')->nullable();
+            $table->boolean('attach_to_load_alerts')->default(false);
+            $table->boolean('attach_to_invoice')->default(false);
+            $table->boolean('default_driver')->default(false);
+            $table->boolean('hide_from_driver')->default(true);
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

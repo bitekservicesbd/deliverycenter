@@ -10,18 +10,20 @@ class AttachmentCategory extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
         'description',
-        'allowed_extensions',
-        'max_file_size',
-        'is_required',
-        'is_active'
+        'notify_email',
+        'retention_days',
+        'attach_to_load_alerts',
+        'attach_to_invoice',
+        'default_driver',
+        'hide_from_driver',
+        'updated_by'
     ];
 
     protected $casts = [
-        'allowed_extensions' => 'array',
-        'max_file_size' => 'integer',
-        'is_required' => 'boolean',
-        'is_active' => 'boolean'
+        'attach_to_load_alerts' => 'boolean',
+        'attach_to_invoice' => 'boolean',
+        'default_driver' => 'boolean',
+        'hide_from_driver' => 'boolean',
     ];
 }

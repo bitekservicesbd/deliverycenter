@@ -1,5 +1,5 @@
 <?php
-// database/migrations/tenant/2024_01_01_000002_create_assets_table.php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -10,21 +10,18 @@ return new class extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
-            $table->string('asset_number')->unique();
-            $table->enum('asset_type', ['vehicle', 'trailer', 'equipment']);
-            $table->string('make')->nullable();
-            $table->string('model')->nullable();
-            $table->year('year')->nullable();
-            $table->string('license_plate')->nullable();
+            $table->string('name')->unique();
+            $table->enum('asset_type', ['truck', 'trailor', 'van', 'car', 'other']);
+            $table->string('asset_number');
+            $table->string('vehicle_make')->nullable();
+            $table->string('vehicle_model')->nullable();
+            $table->year('vehicle_year')->nullable();
             $table->string('vin')->nullable();
-            $table->string('ownership_type')->nullable();
-            $table->string('insurance_number')->nullable();
-            $table->date('insurance_expiry')->nullable();
-            $table->decimal('capacity_weight', 8, 2)->nullable();
-            $table->decimal('capacity_volume', 8, 2)->nullable();
-            $table->boolean('has_tailgate')->default(false);
-            $table->boolean('temperature_controlled')->default(false);
-            $table->foreignId('assigned_carrier_id')->nullable()->constrained('carriers')->onDelete('set null');
+            $table->string('vehicle_license_plate')->nullable();
+            $table->date('vehicle_plate_expiry')->nullable();
+            $table->date('last_service_date')->nullable();
+            $table->date('next_service_due')->nullable();
+            $table->number_format('next_service_distance')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

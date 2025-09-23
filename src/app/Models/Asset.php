@@ -10,35 +10,26 @@ class Asset extends Model
     use HasFactory;
 
     protected $fillable = [
-        'asset_number',
+        'name',
         'asset_type',
-        'make',
-        'model',
-        'year',
-        'license_plate',
+        'asset_number',
+        'vehicle_make',
+        'vehicle_model',
+        'vehicle_year',
         'vin',
-        'ownership_type',
-        'insurance_number',
-        'insurance_expiry',
-        'capacity_weight',
-        'capacity_volume',
-        'has_tailgate',
-        'temperature_controlled',
-        'assigned_carrier_id',
+        'vehicle_license_plate',
+        'vehicle_plate_expiry',
+        'last_service_date',
+        'next_service_due',
+        'next_service_distance',
         'is_active'
     ];
 
     protected $casts = [
-        'insurance_expiry' => 'date',
-        'capacity_weight' => 'decimal:2',
-        'capacity_volume' => 'decimal:2',
-        'has_tailgate' => 'boolean',
+        'vehicle_plate_expiry' => 'date',
+        'last_service_date' => 'date',
+        'next_service_due' => 'date',
         'temperature_controlled' => 'boolean',
         'is_active' => 'boolean'
     ];
-
-    public function assignedCarrier()
-    {
-        return $this->belongsTo(Carrier::class, 'assigned_carrier_id');
-    }
 }
