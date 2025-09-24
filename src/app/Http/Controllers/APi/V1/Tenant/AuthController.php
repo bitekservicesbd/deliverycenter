@@ -77,8 +77,14 @@ class AuthController extends Controller
      */
     public function updateProfile(UpdateProfileRequest $request)
     {
+        $validated = $request->validated();
         $user = $request->user();
-        $user->update($request->validated());
+
+        $user->update(
+            [
+                'name' => $validated['name'],
+            ]
+        );
 
         return successResponse([
             'user' => $user->toResource(),
