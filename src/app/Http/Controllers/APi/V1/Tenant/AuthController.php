@@ -8,7 +8,6 @@ use App\Http\Requests\Api\V1\Tenant\UpdateProfileRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,7 +23,7 @@ class AuthController extends Controller
         $user = User::where('email', $validated['email'])->first();
 
         if (! $user || ! Hash::check($validated['password'], $user->password)) {
-            return errorResponse('Unauthorized', 401);
+            return errorResponse('Login failed', 401);
         }
 
         if ($user->status != 'active') {
@@ -38,7 +37,7 @@ class AuthController extends Controller
         // $cookie = cookie('auth_token', $token, (60 * 24) * 7); // 7 days
 
         // * check if app is in local or not. if in not local that means apps is in production and then set secure to true
-        $secure = Config::get('app.env') !== 'local' ? true : false;
+        // $secure = config('app.env') !== 'local';
 
         $cookie = cookie(
             'auth_token',
@@ -46,16 +45,17 @@ class AuthController extends Controller
             (60 * 24) * 7, // 7 days
             '/',         // path
             null,        // domain (null = current domain)
-            $secure,        // secure (HTTPS only)
-            $secure,        // httpOnly
+            true,        // secure (HTTPS only)
+            true,        // httpOnly
             false,       // raw
-            'None'     // sameSite
+            'Strict'     // sameSite
         );
 
         // Update last login
         $user->update(['last_login_at' => now()]);
 
         return successResponse([
+            'token' => $token,
             'user' => $user->toResource(),
             'tenant' => tenant('id'),
             'abilities' => $abilities,
@@ -77,8 +77,14 @@ class AuthController extends Controller
      */
     public function updateProfile(UpdateProfileRequest $request)
     {
+        $validated = $request->validated();
         $user = $request->user();
-        $user->update($request->validated());
+
+        $user->update(
+            [
+                'name' => $validated['name'],
+            ]
+        );
 
         return successResponse([
             'user' => $user->toResource(),
@@ -116,6 +122,13 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete();
 
         return successResponse([], 'Logged out successfully')->withCookie($cookie);
+    }
+
+    public function forgetCookie(Request $request)
+    {
+        $cookie = Cookie::forget('auth_token');
+
+        return successResponse([], 'Cookie removed successfully')->withCookie($cookie);
     }
 
     /**
