@@ -34,12 +34,8 @@ Route::prefix('auth')->name('auth.')->middleware(['cookie_set'])->group(function
 | Protected Tenant Routes
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth:sanctum', 'cookie_set'])->group(function () {
+Route::middleware(['cookie_set'])->group(function () {
 
-    // Test Routes
-    Route::get('/test', [TestController::class, 'index'])->name('test');
-    Route::get('/test/database', [TestController::class, 'testDatabase'])->name('test.database');
-    Route::get('/test/permissions', [TestController::class, 'testPermissions'])->name('test.permissions');
 
     /*
     |--------------------------------------------------------------------------
