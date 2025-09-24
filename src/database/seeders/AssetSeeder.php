@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Asset;
+use Illuminate\Database\Seeder;
 
 class AssetSeeder extends Seeder
 {
@@ -23,7 +23,7 @@ class AssetSeeder extends Seeder
                 'last_service_date' => null,
                 'next_service_due' => null,
                 'next_service_distance' => null,
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'SL 102',
@@ -38,7 +38,7 @@ class AssetSeeder extends Seeder
                 'last_service_date' => null,
                 'next_service_due' => null,
                 'next_service_distance' => null,
-                'is_active' => true
+                'is_active' => true,
             ],
             [
                 'name' => 'SL 103',
@@ -53,8 +53,8 @@ class AssetSeeder extends Seeder
                 'last_service_date' => null,
                 'next_service_due' => null,
                 'next_service_distance' => null,
-                'is_active' => true
-            ]
+                'is_active' => true,
+            ],
         ];
 
         foreach ($assets as $asset) {

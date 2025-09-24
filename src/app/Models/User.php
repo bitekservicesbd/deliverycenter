@@ -24,7 +24,7 @@ class User extends Authenticatable
         'permissions',
         'avatar',
         'last_login_at',
-        'company_id'
+        'company_id',
     ];
 
     protected $hidden = [
@@ -61,7 +61,7 @@ class User extends Authenticatable
      */
     public function hasPermission(string $permission): bool
     {
-        if (!$this->permissions) {
+        if (! $this->permissions) {
             return false;
         }
 

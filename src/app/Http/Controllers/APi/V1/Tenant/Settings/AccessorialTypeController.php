@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Api\V1\Tenant\Settings;
 
 use App\Http\Controllers\Controller;
 use App\Models\AccessorialType;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 
 class AccessorialTypeController extends Controller
@@ -15,43 +16,60 @@ class AccessorialTypeController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $query = AccessorialType::query();
+        try {
+            $query = AccessorialType::query();
 
-        // Filter by active status
-        if ($request->has('active')) {
-            $query->where('is_active', $request->boolean('active'));
+            // Apply filters only if provided
+            if ($request->filled('active')) {
+                $query->where('is_active', $request->boolean('active'));
+            }
+
+            if ($request->filled('fuel')) {
+                $query->where('fuel', $request->boolean('fuel'));
+            }
+
+            if ($request->filled('new_load')) {
+                $query->where('new_load', $request->boolean('new_load'));
+            }
+
+            if ($request->filled('search')) {
+                $search = $request->get('search');
+                $query->where(function ($q) use ($search) {
+                    $q->where('description', 'like', "%{$search}%")
+                        ->orWhere('code', 'like', "%{$search}%")
+                        ->orWhere('gl_code', 'like', "%{$search}%");
+                });
+            }
+
+            // Apply sorting if provided
+            if ($request->filled('sort_by')) {
+                $sortBy = $request->get('sort_by', 'description');
+                $sortOrder = $request->get('sort_order', 'asc');
+                $query->orderBy($sortBy, $sortOrder);
+            } else {
+                $query->orderBy('description', 'asc');
+            }
+
+            // Get all data (no server-side pagination)
+            $accessorialTypes = $query->get();
+
+            return successResponse(
+                $this->formatAccessorialTypesResponse($accessorialTypes),
+                'Accessorial types retrieved successfully'
+            );
+
+        } catch (\Exception $e) {
+            Log::error('Error fetching accessorial types: '.$e->getMessage(), [
+                'request' => $request->all(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            return errorResponse(
+                'Failed to retrieve accessorial types',
+                500,
+                ['error_code' => 'FETCH_ERROR']
+            );
         }
-
-        // Filter by fuel
-        if ($request->has('fuel')) {
-            $query->where('fuel', $request->boolean('fuel'));
-        }
-
-        // Filter by new_load
-        if ($request->has('new_load')) {
-            $query->where('new_load', $request->boolean('new_load'));
-        }
-
-        // Search functionality
-        if ($request->has('search')) {
-            $search = $request->get('search');
-            $query->where(function ($q) use ($search) {
-                $q->where('description', 'like', "%{$search}%")
-                  ->orWhere('code', 'like', "%{$search}%")
-                  ->orWhere('gl_code', 'like', "%{$search}%");
-            });
-        }
-
-        // Sorting
-        $sortBy = $request->get('sort_by', 'description');
-        $sortOrder = $request->get('sort_order', 'asc');
-        $query->orderBy($sortBy, $sortOrder);
-
-        // Pagination
-        $perPage = $request->get('per_page', 15);
-        $accessorialTypes = $query->paginate($perPage);
-
-        return response()->json($accessorialTypes);
     }
 
     /**
@@ -59,23 +77,58 @@ class AccessorialTypeController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        $validated = $request->validate([
-            'description' => 'required|string|max:255',
-            'code' => 'required|string|max:50|unique:accessorial_types,code',
-            'discount' => 'boolean',
-            'fuel' => 'boolean',
-            'new_load' => 'boolean',
-            'gl_code' => 'nullable|string|max:100',
-            'commission' => 'nullable|numeric|min:0|max:100',
-            'is_active' => 'boolean'
-        ]);
+        try {
+            $validated = $request->validate([
+                'description' => 'required|string|max:255',
+                'code' => 'required|string|max:50|unique:accessorial_types,code',
+                'discount' => 'boolean',
+                'fuel' => 'boolean',
+                'new_load' => 'boolean',
+                'gl_code' => 'nullable|string|max:100',
+                'commission' => 'nullable|numeric|min:0|max:100',
+                'is_active' => 'boolean',
+            ], [
+                'description.required' => 'Description is required',
+                'code.required' => 'Code is required',
+                'code.unique' => 'This code already exists',
+                'commission.min' => 'Commission must be at least 0%',
+                'commission.max' => 'Commission cannot exceed 100%',
+            ]);
 
-        $accessorialType = AccessorialType::create($validated);
+            $accessorialType = AccessorialType::create(array_merge($validated, [
+                'is_active' => $validated['is_active'] ?? true,
+                'discount' => $validated['discount'] ?? false,
+                'fuel' => $validated['fuel'] ?? false,
+                'new_load' => $validated['new_load'] ?? false,
+            ]));
 
-        return response()->json([
-            'message' => 'Accessorial type created successfully',
-            'data' => $accessorialType
-        ], 201);
+            return successResponse(
+                $this->formatSingleAccessorialTypeResponse($accessorialType),
+                'Accessorial type created successfully',
+                201
+            );
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return errorResponse(
+                'Validation failed',
+                422,
+                [
+                    'error_code' => 'VALIDATION_ERROR',
+                    'validation_errors' => $e->errors(),
+                ]
+            );
+        } catch (\Exception $e) {
+            Log::error('Error creating accessorial type: '.$e->getMessage(), [
+                'request' => $request->all(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            return errorResponse(
+                'Failed to create accessorial type',
+                500,
+                ['error_code' => 'CREATE_ERROR']
+            );
+        }
     }
 
     /**
@@ -83,7 +136,23 @@ class AccessorialTypeController extends Controller
      */
     public function show(AccessorialType $accessorialType): JsonResponse
     {
-        return response()->json($accessorialType);
+        try {
+            return successResponse(
+                $this->formatSingleAccessorialTypeResponse($accessorialType),
+                'Accessorial type retrieved successfully'
+            );
+        } catch (\Exception $e) {
+            Log::error('Error fetching accessorial type: '.$e->getMessage(), [
+                'accessorial_type_id' => $accessorialType->id ?? 'unknown',
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            return errorResponse(
+                'Failed to retrieve accessorial type',
+                500,
+                ['error_code' => 'FETCH_ERROR']
+            );
+        }
     }
 
     /**
@@ -91,42 +160,87 @@ class AccessorialTypeController extends Controller
      */
     public function update(Request $request, AccessorialType $accessorialType): JsonResponse
     {
-        $validated = $request->validate([
-            'description' => 'sometimes|required|string|max:255',
-            'code' => [
-                'sometimes',
-                'required',
-                'string',
-                'max:50',
-                Rule::unique('accessorial_types', 'code')->ignore($accessorialType->id)
-            ],
-            'discount' => 'boolean',
-            'fuel' => 'boolean',
-            'new_load' => 'boolean',
-            'gl_code' => 'nullable|string|max:100',
-            'commission' => 'nullable|numeric|min:0|max:100',
-            'is_active' => 'boolean'
-        ]);
+        try {
+            $validated = $request->validate([
+                'description' => 'sometimes|required|string|max:255',
+                'code' => [
+                    'sometimes',
+                    'required',
+                    'string',
+                    'max:50',
+                    Rule::unique('accessorial_types', 'code')->ignore($accessorialType->id),
+                ],
+                'discount' => 'boolean',
+                'fuel' => 'boolean',
+                'new_load' => 'boolean',
+                'gl_code' => 'nullable|string|max:100',
+                'commission' => 'nullable|numeric|min:0|max:100',
+                'is_active' => 'boolean',
+            ], [
+                'description.required' => 'Description is required',
+                'code.required' => 'Code is required',
+                'code.unique' => 'This code already exists',
+                'commission.min' => 'Commission must be at least 0%',
+                'commission.max' => 'Commission cannot exceed 100%',
+            ]);
 
-        $accessorialType->update($validated);
+            $accessorialType->update($validated);
 
-        return response()->json([
-            'message' => 'Accessorial type updated successfully',
-            'data' => $accessorialType->fresh()
-        ]);
+            return successResponse(
+                $this->formatSingleAccessorialTypeResponse($accessorialType->fresh()),
+                'Accessorial type updated successfully'
+            );
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return errorResponse(
+                'Validation failed',
+                422,
+                [
+                    'error_code' => 'VALIDATION_ERROR',
+                    'validation_errors' => $e->errors(),
+                ]
+            );
+        } catch (\Exception $e) {
+            Log::error('Error updating accessorial type: '.$e->getMessage(), [
+                'accessorial_type_id' => $accessorialType->id,
+                'request' => $request->all(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            return errorResponse(
+                'Failed to update accessorial type',
+                500,
+                ['error_code' => 'UPDATE_ERROR']
+            );
+        }
     }
 
     /**
-     * Remove the specified accessorial type.
+     * Remove the specified accessorial type (soft delete).
      */
     public function destroy(AccessorialType $accessorialType): JsonResponse
     {
-        // Soft delete by setting inactive instead of actual deletion
-        $accessorialType->update(['is_active' => false]);
+        try {
+            // Soft delete by marking as inactive
+            $accessorialType->update(['is_active' => false]);
 
-        return response()->json([
-            'message' => 'Accessorial type deactivated successfully'
-        ]);
+            return successResponse(
+                [],
+                'Accessorial type deactivated successfully'
+            );
+
+        } catch (\Exception $e) {
+            Log::error('Error deactivating accessorial type: '.$e->getMessage(), [
+                'accessorial_type_id' => $accessorialType->id,
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            return errorResponse(
+                'Failed to deactivate accessorial type',
+                500,
+                ['error_code' => 'DELETE_ERROR']
+            );
+        }
     }
 
     /**
@@ -134,12 +248,26 @@ class AccessorialTypeController extends Controller
      */
     public function restore(AccessorialType $accessorialType): JsonResponse
     {
-        $accessorialType->update(['is_active' => true]);
+        try {
+            $accessorialType->update(['is_active' => true]);
 
-        return response()->json([
-            'message' => 'Accessorial type activated successfully',
-            'data' => $accessorialType->fresh()
-        ]);
+            return successResponse(
+                $this->formatSingleAccessorialTypeResponse($accessorialType->fresh()),
+                'Accessorial type activated successfully'
+            );
+
+        } catch (\Exception $e) {
+            Log::error('Error restoring accessorial type: '.$e->getMessage(), [
+                'accessorial_type_id' => $accessorialType->id,
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            return errorResponse(
+                'Failed to activate accessorial type',
+                500,
+                ['error_code' => 'RESTORE_ERROR']
+            );
+        }
     }
 
     /**
@@ -147,12 +275,38 @@ class AccessorialTypeController extends Controller
      */
     public function options(): JsonResponse
     {
-        $accessorialTypes = AccessorialType::where('is_active', true)
-            ->select('id', 'description', 'code', 'commission', 'fuel', 'new_load')
-            ->orderBy('description')
-            ->get();
+        try {
+            $accessorialTypes = AccessorialType::where('is_active', true)
+                ->select('id', 'description', 'code', 'commission', 'fuel', 'new_load')
+                ->orderBy('description')
+                ->get();
 
-        return response()->json($accessorialTypes);
+            return successResponse(
+                $accessorialTypes->map(function ($type) {
+                    return [
+                        'id' => $type->id,
+                        'label' => $type->description,
+                        'value' => $type->id,
+                        'code' => $type->code,
+                        'commission' => $type->commission,
+                        'fuel' => $type->fuel,
+                        'new_load' => $type->new_load,
+                    ];
+                })->toArray(),
+                'Accessorial type options retrieved successfully'
+            );
+
+        } catch (\Exception $e) {
+            Log::error('Error fetching accessorial type options: '.$e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            return errorResponse(
+                'Failed to retrieve accessorial type options',
+                500,
+                ['error_code' => 'OPTIONS_ERROR']
+            );
+        }
     }
 
     /**
@@ -160,13 +314,36 @@ class AccessorialTypeController extends Controller
      */
     public function fuel(): JsonResponse
     {
-        $fuelTypes = AccessorialType::where('is_active', true)
-            ->where('fuel', true)
-            ->select('id', 'description', 'code', 'commission')
-            ->orderBy('description')
-            ->get();
+        try {
+            $fuelTypes = AccessorialType::where('is_active', true)
+                ->where('fuel', true)
+                ->select('id', 'description', 'code', 'commission')
+                ->orderBy('description')
+                ->get();
 
-        return response()->json($fuelTypes);
+            return successResponse(
+                $fuelTypes->map(function ($type) {
+                    return [
+                        'id' => $type->id,
+                        'description' => $type->description,
+                        'code' => $type->code,
+                        'commission' => $type->commission,
+                    ];
+                })->toArray(),
+                'Fuel accessorial types retrieved successfully'
+            );
+
+        } catch (\Exception $e) {
+            Log::error('Error fetching fuel accessorial types: '.$e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            return errorResponse(
+                'Failed to retrieve fuel accessorial types',
+                500,
+                ['error_code' => 'FUEL_ERROR']
+            );
+        }
     }
 
     /**
@@ -174,12 +351,65 @@ class AccessorialTypeController extends Controller
      */
     public function newLoad(): JsonResponse
     {
-        $newLoadTypes = AccessorialType::where('is_active', true)
-            ->where('new_load', true)
-            ->select('id', 'description', 'code', 'commission')
-            ->orderBy('description')
-            ->get();
+        try {
+            $newLoadTypes = AccessorialType::where('is_active', true)
+                ->where('new_load', true)
+                ->select('id', 'description', 'code', 'commission')
+                ->orderBy('description')
+                ->get();
 
-        return response()->json($newLoadTypes);
+            return successResponse(
+                $newLoadTypes->map(function ($type) {
+                    return [
+                        'id' => $type->id,
+                        'description' => $type->description,
+                        'code' => $type->code,
+                        'commission' => $type->commission,
+                    ];
+                })->toArray(),
+                'New load accessorial types retrieved successfully'
+            );
+
+        } catch (\Exception $e) {
+            Log::error('Error fetching new load accessorial types: '.$e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            return errorResponse(
+                'Failed to retrieve new load accessorial types',
+                500,
+                ['error_code' => 'NEW_LOAD_ERROR']
+            );
+        }
+    }
+
+    /**
+     * Format multiple accessorial types response
+     */
+    private function formatAccessorialTypesResponse($accessorialTypes): array
+    {
+        return $accessorialTypes->map(function ($type) {
+            return $this->formatSingleAccessorialTypeResponse($type);
+        })->toArray();
+    }
+
+    /**
+     * Format single accessorial type response
+     */
+    private function formatSingleAccessorialTypeResponse($accessorialType): array
+    {
+        return [
+            'id' => $accessorialType->id,
+            'description' => $accessorialType->description,
+            'code' => $accessorialType->code,
+            'gl_code' => $accessorialType->gl_code,
+            'commission' => $accessorialType->commission,
+            'discount' => $accessorialType->discount,
+            'fuel' => $accessorialType->fuel,
+            'new_load' => $accessorialType->new_load,
+            'is_active' => $accessorialType->is_active,
+            'created_at' => $accessorialType->created_at?->toISOString(),
+            'updated_at' => $accessorialType->updated_at?->toISOString(),
+        ];
     }
 }

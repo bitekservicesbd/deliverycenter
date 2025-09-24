@@ -5,7 +5,6 @@ use App\Http\Controllers\Api\V1\Tenant\AuthController;
 use App\Http\Controllers\Api\V1\Tenant\Settings\AccessorialTypeController;
 use App\Http\Controllers\Api\V1\Tenant\Settings\AssetController;
 use App\Http\Controllers\Api\V1\Tenant\Settings\AttachmentCategoryController;
-use App\Http\Controllers\Api\V1\Tenant\Settings\AutoDispatchController;
 use App\Http\Controllers\Api\V1\Tenant\Settings\BillingTermController;
 use App\Http\Controllers\Api\V1\Tenant\TestController;
 use Illuminate\Support\Facades\Route;
@@ -35,7 +34,7 @@ Route::prefix('auth')->name('auth.')->middleware(['cookie_set'])->group(function
 | Protected Tenant Routes
 |--------------------------------------------------------------------------
 */
-Route::middleware(['cookie_set'])->group(function () {
+Route::middleware(['auth:sanctum', 'cookie_set'])->group(function () {
 
     // Test Routes
     Route::get('/test', [TestController::class, 'index'])->name('test');

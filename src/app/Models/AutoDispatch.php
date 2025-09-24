@@ -24,7 +24,7 @@ class AutoDispatch extends Model
         'end_date',
         'dispatch_on_days',
         'alert_min_before_ready',
-        'enable'
+        'enable',
     ];
 
     protected $casts = [
@@ -38,7 +38,7 @@ class AutoDispatch extends Model
         'delivery_zone' => 'array',
         'delivery_dispatch_zone' => 'array',
         'dispatch_on_days' => 'array',
-        'enable' => 'boolean'
+        'enable' => 'boolean',
     ];
 
     // Relationships

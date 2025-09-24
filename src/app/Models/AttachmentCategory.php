@@ -17,7 +17,7 @@ class AttachmentCategory extends Model
         'attach_to_invoice',
         'default_driver',
         'hide_from_driver',
-        'updated_by'
+        'updated_by',
     ];
 
     protected $casts = [

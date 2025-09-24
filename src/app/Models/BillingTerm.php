@@ -13,12 +13,12 @@ class BillingTerm extends Model
         'description',
         'code',
         'days',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
         'days' => 'integer',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     // Scope for active billing terms

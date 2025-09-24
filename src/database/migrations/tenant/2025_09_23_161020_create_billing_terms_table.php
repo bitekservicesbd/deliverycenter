@@ -15,7 +15,7 @@ return new class extends Migration
             $table->integer('days')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            
+
             $table->index(['code']);
             $table->index(['is_active']);
         });

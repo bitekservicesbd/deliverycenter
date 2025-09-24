@@ -17,7 +17,7 @@ class AccessorialType extends Model
         'new_load',
         'gl_code',
         'commission',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -25,6 +25,6 @@ class AccessorialType extends Model
         'fuel' => 'boolean',
         'new_load' => 'boolean',
         'commission' => 'decimal:2',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

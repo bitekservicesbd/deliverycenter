@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\AttachmentCategory;
+use Illuminate\Database\Seeder;
 
 class AttachmentCategorySeeder extends Seeder
 {
@@ -18,7 +18,7 @@ class AttachmentCategorySeeder extends Seeder
                 'attach_to_invoice' => false,
                 'default_driver' => false,
                 'hide_from_driver' => true,
-                'updated_by' => null
+                'updated_by' => null,
             ],
 
             [
@@ -29,7 +29,7 @@ class AttachmentCategorySeeder extends Seeder
                 'attach_to_invoice' => true,
                 'default_driver' => false,
                 'hide_from_driver' => true,
-                'updated_by' => null
+                'updated_by' => null,
             ],
 
             [
@@ -40,7 +40,7 @@ class AttachmentCategorySeeder extends Seeder
                 'attach_to_invoice' => false,
                 'default_driver' => true,
                 'hide_from_driver' => false,
-                'updated_by' => null
+                'updated_by' => null,
             ],
             [
                 'description' => 'Other',
@@ -50,7 +50,7 @@ class AttachmentCategorySeeder extends Seeder
                 'attach_to_invoice' => false,
                 'default_driver' => false,
                 'hide_from_driver' => true,
-                'updated_by' => null
+                'updated_by' => null,
             ],
 
             [
@@ -61,7 +61,7 @@ class AttachmentCategorySeeder extends Seeder
                 'attach_to_invoice' => true,
                 'default_driver' => false,
                 'hide_from_driver' => true,
-                'updated_by' => null
+                'updated_by' => null,
             ],
         ];
 

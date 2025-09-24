@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\AccessorialType;
+use Illuminate\Database\Seeder;
 
 class AccessorialTypeSeeder extends Seeder
 {
@@ -23,7 +23,7 @@ class AccessorialTypeSeeder extends Seeder
             ['description' => 'COD Fee', 'code' => 'COD', 'discount' => false, 'fuel' => false, 'new_load' => false, 'gl_code' => '4200', 'commission' => 2.00],
             ['description' => 'Discount Applied', 'code' => 'DISC', 'discount' => true, 'fuel' => false, 'new_load' => false, 'gl_code' => '4900', 'commission' => 0.00],
             ['description' => 'Multi-Stop', 'code' => 'MULTI', 'discount' => false, 'fuel' => false, 'new_load' => false, 'gl_code' => '4210', 'commission' => 6.00],
-            ['description' => 'Temperature Control', 'code' => 'TEMP', 'discount' => false, 'fuel' => false, 'new_load' => false, 'gl_code' => '4220', 'commission' => 15.00]
+            ['description' => 'Temperature Control', 'code' => 'TEMP', 'discount' => false, 'fuel' => false, 'new_load' => false, 'gl_code' => '4220', 'commission' => 15.00],
         ];
 
         foreach ($accessorialTypes as $type) {

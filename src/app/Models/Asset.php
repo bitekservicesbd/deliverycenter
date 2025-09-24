@@ -22,7 +22,7 @@ class Asset extends Model
         'last_service_date',
         'next_service_due',
         'next_service_distance',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
@@ -30,6 +30,6 @@ class Asset extends Model
         'last_service_date' => 'date',
         'next_service_due' => 'date',
         'temperature_controlled' => 'boolean',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 }

@@ -3,14 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Tenant;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\Tenant\ChangePasswordRequest;
-use App\Http\Requests\Api\V1\Tenant\UpdateProfileRequest;
-use App\Http\Requests\Auth\LoginRequest;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class TenantIdentifierController extends Controller
@@ -18,7 +11,6 @@ class TenantIdentifierController extends Controller
     /**
      * Get tenant identifier
      */
-
     public function getTenantIdentifier(Request $request)
     {
         try {
@@ -46,46 +38,46 @@ class TenantIdentifierController extends Controller
             $identificationMethod = null;
 
             // Primary identification by tenant_id
-            if (!empty($validated['tenant_id'])) {
+            if (! empty($validated['tenant_id'])) {
                 $tenant = \App\Models\Tenant::with(['domains'])
                     ->where('id', $validated['tenant_id'])
                     ->first();
 
                 $identificationMethod = 'tenant_id';
 
-                if (!$tenant) {
+                if (! $tenant) {
                     return errorResponse(
                         'Tenant not found with the provided ID',
                         404,
                         [
                             'error_code' => 'TENANT_NOT_FOUND',
                             'identifier_type' => 'tenant_id',
-                            'identifier_value' => $validated['tenant_id']
+                            'identifier_value' => $validated['tenant_id'],
                         ]
                     );
                 }
             }
 
             // Secondary identification by domain
-            if (!empty($validated['tenant_domain'])) {
+            if (! empty($validated['tenant_domain'])) {
                 $domain = \App\Models\Domain::with(['tenant'])
                     ->where('domain', $validated['tenant_domain'])
                     ->first();
 
-                if (!$domain) {
+                if (! $domain) {
                     return errorResponse(
                         'Domain not found in the system',
                         404,
                         [
                             'error_code' => 'DOMAIN_NOT_FOUND',
                             'identifier_type' => 'tenant_domain',
-                            'identifier_value' => $validated['tenant_domain']
+                            'identifier_value' => $validated['tenant_domain'],
                         ]
                     );
                 }
 
                 // If tenant wasn't found by ID, use domain's tenant
-                if (!$tenant) {
+                if (! $tenant) {
                     $tenant = $domain->tenant;
                     $identificationMethod = 'tenant_domain';
                 }
@@ -98,14 +90,14 @@ class TenantIdentifierController extends Controller
                         [
                             'error_code' => 'IDENTIFIER_MISMATCH',
                             'tenant_id' => $tenant->id,
-                            'domain_tenant_id' => $domain->tenant_id
+                            'domain_tenant_id' => $domain->tenant_id,
                         ]
                     );
                 }
             }
 
             // Final verification
-            if (!$tenant) {
+            if (! $tenant) {
                 return errorResponse(
                     'Unable to identify tenant with provided information',
                     404,
@@ -115,7 +107,7 @@ class TenantIdentifierController extends Controller
 
             // Comprehensive status checks
             $statusValidation = $this->validateTenantAndDomainStatus($tenant, $domain);
-            if (!$statusValidation['valid']) {
+            if (! $statusValidation['valid']) {
                 return errorResponse(
                     $statusValidation['message'],
                     $statusValidation['status_code'],
@@ -149,14 +141,14 @@ class TenantIdentifierController extends Controller
                 422,
                 [
                     'error_code' => 'VALIDATION_ERROR',
-                    'validation_errors' => $e->errors()
+                    'validation_errors' => $e->errors(),
                 ]
             );
         } catch (\Exception $e) {
             // Log the error for debugging
-            Log::error('Tenant identification error: ' . $e->getMessage(), [
+            Log::error('Tenant identification error: '.$e->getMessage(), [
                 'request_data' => $request->all(),
-                'trace' => $e->getTraceAsString()
+                'trace' => $e->getTraceAsString(),
             ]);
 
             return errorResponse(
@@ -184,8 +176,8 @@ class TenantIdentifierController extends Controller
                     'user_message' => 'Your account is currently inactive. Please contact the administrator for reactivation assistance.',
                     'tenant_status' => $tenant->status,
                     'tenant_id' => $tenant->id,
-                    'contact_support' => true
-                ]
+                    'contact_support' => true,
+                ],
             ];
         }
 
@@ -201,8 +193,8 @@ class TenantIdentifierController extends Controller
                     'tenant_status' => $tenant->status,
                     'tenant_id' => $tenant->id,
                     'suspended_at' => $tenant->suspended_at ?? null,
-                    'contact_support' => true
-                ]
+                    'contact_support' => true,
+                ],
             ];
         }
 
@@ -221,8 +213,8 @@ class TenantIdentifierController extends Controller
                             'payment_status' => $tenant->payment_status,
                             'tenant_id' => $tenant->id,
                             'retry_after' => '24 hours',
-                            'contact_billing' => true
-                        ]
+                            'contact_billing' => true,
+                        ],
                     ];
 
                 case 'overdue':
@@ -238,8 +230,8 @@ class TenantIdentifierController extends Controller
                             'tenant_id' => $tenant->id,
                             'overdue_since' => $tenant->payment_due_date ?? null,
                             'contact_billing' => true,
-                            'grace_period_ended' => true
-                        ]
+                            'grace_period_ended' => true,
+                        ],
                     ];
 
                 case 'failed':
@@ -255,8 +247,8 @@ class TenantIdentifierController extends Controller
                             'tenant_id' => $tenant->id,
                             'failed_at' => $tenant->payment_failed_at ?? null,
                             'retry_available' => true,
-                            'contact_support' => true
-                        ]
+                            'contact_support' => true,
+                        ],
                     ];
             }
         }
@@ -264,7 +256,7 @@ class TenantIdentifierController extends Controller
         // Check general subscription status
         if (
             isset($tenant->subscription_status) &&
-            !in_array($tenant->subscription_status, ['active', 'trial', 'grace_period'])
+            ! in_array($tenant->subscription_status, ['active', 'trial', 'grace_period'])
         ) {
             return [
                 'valid' => false,
@@ -277,8 +269,8 @@ class TenantIdentifierController extends Controller
                     'subscription_status' => $tenant->subscription_status,
                     'tenant_id' => $tenant->id,
                     'renewal_available' => true,
-                    'contact_sales' => true
-                ]
+                    'contact_sales' => true,
+                ],
             ];
         }
 
