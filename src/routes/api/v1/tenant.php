@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\V1\Tenant\Settings\AccessorialTypeController;
 use App\Http\Controllers\Api\V1\Tenant\Settings\AssetController;
 use App\Http\Controllers\Api\V1\Tenant\Settings\AttachmentCategoryController;
 use App\Http\Controllers\Api\V1\Tenant\Settings\BillingTermController;
-use App\Http\Controllers\Api\V1\Tenant\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('auth')->name('auth.')->middleware(['cookie_set'])->group(function () {
     // Public authentication endpoints
     Route::post('/login', [AuthController::class, 'login'])->name('login')->middleware('api_guest');
-    Route::post('/verify-token', [AuthController::class, 'verifyToken'])->name('verify-token');
+    Route::post('/forget-cookie', [AuthController::class, 'forgetCookie'])->name('forget.cookie'); // forget cookie from browser
 
     // Protected authentication endpoints
     Route::middleware(['auth:sanctum', 'tenant_auth'])->group(function () {
@@ -34,8 +33,7 @@ Route::prefix('auth')->name('auth.')->middleware(['cookie_set'])->group(function
 | Protected Tenant Routes
 |--------------------------------------------------------------------------
 */
-Route::middleware(['cookie_set'])->group(function () {
-
+Route::middleware(['cookie_set', 'auth:sanctum', 'tenant_auth'])->group(function () {
 
     /*
     |--------------------------------------------------------------------------
